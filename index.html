@@ -167,6 +167,25 @@
   .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.8s ease, transform 0.8s ease; }
   .reveal.visible { opacity: 1; transform: translateY(0); }
 
+  /* DROPDOWN NAV */
+  .nav-dropdown { position: relative; }
+  .nav-dropdown-toggle { font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.16em; color: var(--text-mid); text-decoration: none; transition: color 0.2s; cursor: pointer; background: none; border: none; padding: 0; display: flex; align-items: center; gap: 0.4rem; }
+  .nav-dropdown-toggle:hover { color: var(--gold); }
+  .nav-dropdown-toggle::after { content: '▾'; font-size: 0.5rem; opacity: 0.6; }
+  .nav-dropdown-menu { position: absolute; top: calc(100% + 1rem); left: 50%; transform: translateX(-50%); background: var(--forest); border: 1px solid rgba(184,151,58,0.3); min-width: 280px; z-index: 200; display: none; box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
+  .nav-dropdown:hover .nav-dropdown-menu { display: block; }
+  .nav-dropdown-menu a { display: flex; align-items: center; gap: 0.8rem; padding: 0.75rem 1.2rem; text-decoration: none; border-bottom: 1px solid rgba(184,151,58,0.1); transition: background 0.2s; }
+  .nav-dropdown-menu a:last-child { border-bottom: none; }
+  .nav-dropdown-menu a:hover { background: rgba(184,151,58,0.1); }
+  .nav-dropdown-menu a .paper-num { font-family: 'Cinzel', serif; font-size: 0.48rem; letter-spacing: 0.2em; color: var(--gold); opacity: 0.7; flex-shrink: 0; }
+  .nav-dropdown-menu a .paper-name { font-family: 'Cinzel', serif; font-size: 0.55rem; letter-spacing: 0.12em; color: rgba(245,240,232,0.7); }
+
+  /* READ IN DEPTH BUTTON */
+  .btn-indepth { display: inline-flex; align-items: center; gap: 0.5rem; font-family: 'Cinzel', serif; font-size: 0.58rem; letter-spacing: 0.18em; color: var(--gold); background: transparent; border: 1px solid rgba(184,151,58,0.4); padding: 0.7rem 1.4rem; text-decoration: none; transition: all 0.25s; margin-top: 1.5rem; }
+  .btn-indepth:hover { background: var(--gold); color: var(--forest); border-color: var(--gold); }
+  .btn-indepth svg { width: 12px; height: 12px; stroke: currentColor; fill: none; transition: transform 0.2s; }
+  .btn-indepth:hover svg { transform: translateX(3px); }
+
   @media (max-width: 900px) {
     nav { padding: 1rem 2rem; }
     .nav-links { display: none; }
@@ -201,7 +220,20 @@
   </div>
   <ul class="nav-links">
     <li><a href="#intro">About</a></li>
-    <li><a href="#papers">Research</a></li>
+    <li class="nav-dropdown">
+      <button class="nav-dropdown-toggle">Papers</button>
+      <div class="nav-dropdown-menu">
+        <a href="paper-01-anchor-single.html"><span class="paper-num">01</span><span class="paper-name">Anchor-Single Analysis</span></a>
+        <a href="paper-02-irreducible-complexity.html"><span class="paper-num">02</span><span class="paper-name">Irreducible Complexity</span></a>
+        <a href="paper-03-efficiency-gradient.html"><span class="paper-num">03</span><span class="paper-name">Efficiency Gradient</span></a>
+        <a href="paper-04-natural-organization.html"><span class="paper-num">04</span><span class="paper-name">Natural Organization</span></a>
+        <a href="paper-05-absent-from-observation.html"><span class="paper-num">05</span><span class="paper-name">Absent From Observation</span></a>
+        <a href="paper-06-constitutive-intelligence.html"><span class="paper-num">06</span><span class="paper-name">Constitutive Intelligence</span></a>
+        <a href="paper-07-generalized-existence-theorem.html"><span class="paper-num">07</span><span class="paper-name">Generalized Existence Theorem</span></a>
+        <a href="paper-08-branching-sensitivity.html"><span class="paper-num">08</span><span class="paper-name">Branching Sensitivity</span></a>
+        <a href="paper-09-formal-logic.html"><span class="paper-num">09</span><span class="paper-name">Formal Logic</span></a>
+      </div>
+    </li>
     <li><a href="#series">Series</a></li>
     <li><a href="#findings">Key Findings</a></li>
     <li><a href="#founder">Founder</a></li>
@@ -304,6 +336,7 @@
     <div class="paper-full-width">
       <h4>The Spatial Replication — The Most Critical Finding</h4>
       <p>When the analysis is moved from sequence space to three-dimensional physical space — measuring co-occurrence by direct atomic proximity rather than sequential position — <strong>the same ratio appears</strong>. At protein-protein inter-chain interfaces (any heavy atom within 5Å), A→N shows Obs/Exp = 0.8290. At homodimer interfaces, A→N shows Obs/Exp = 0.8289. The correlation between interface pair preferences and intra-chain surface preferences is r = 0.9134. Of 380 amino acid pairs, 284 (74.7%) show the same directional preference whether measured by sequence proximity or physical proximity — versus 50% expected by chance. The organizational signal is <em>physically instantiated in three-dimensional structure</em>. It is not a property of how sequences are written. It is a property of how proteins are built.</p>
+      <a href="paper-01-anchor-single.html" class="btn-indepth">Read In Depth <svg viewBox="0 0 24 24" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
     </div>
   </div>
 
@@ -335,6 +368,7 @@
     <div class="paper-full-width">
       <h4>What Could Explain the Missing 78.4%?</h4>
       <p>Three non-exclusive hypotheses are proposed: (1) <strong>Non-local effects</strong> — forces acting across distances not captured by standard force fields; (2) <strong>Evolutionary tiling</strong> — a "grammar" where pairs are selected for informational error-correction rather than structural stability alone; (3) <strong>Hydration dynamics</strong> — time-dependent water exclusion effects not captured by static hydrophobicity scales. The magnitude of the residual (78.4%) suggests that adding missing variables is unlikely to reduce unexplained variance to zero. The inclusion of BLOSUM62 already implicitly absorbs many unknown historical constraints — and the signal survives it.</p>
+      <a href="paper-02-irreducible-complexity.html" class="btn-indepth">Read In Depth <svg viewBox="0 0 24 24" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
     </div>
   </div>
 
@@ -364,6 +398,7 @@
         <p><strong>Testable prediction:</strong> adaptive responses to environmental change should be observable on ecological timescales without requiring new mutations — consistent with Darwin's finch beak morphology observations.</p>
       </div>
     </div>
+    <a href="paper-03-efficiency-gradient.html" class="btn-indepth" style="display:inline-flex;margin-top:1.5rem;">Read In Depth <svg viewBox="0 0 24 24" stroke-width="2" style="width:12px;height:12px;stroke:currentColor;fill:none;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
   </div>
 
   <!-- P4 -->
@@ -393,6 +428,7 @@
         <p style="margin-top:1rem;">Universal co-selection memory confirmed across all five classification classes (Z &gt; 24, p ≈ 0 on 166,382 independent observations). Replicated across MT19937, PCG64, Xoshiro256**, ChaCha20, and ANU quantum source — EPF baseline = 0.8467 (SD &lt; 0.005).</p>
       </div>
     </div>
+    <a href="paper-04-natural-organization.html" class="btn-indepth" style="display:inline-flex;margin-top:1.5rem;">Read In Depth <svg viewBox="0 0 24 24" stroke-width="2" style="width:12px;height:12px;stroke:currentColor;fill:none;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
   </div>
 
   <!-- P5 -->
@@ -422,6 +458,7 @@
     <div class="paper-full-width">
       <h4>Constitutive Intelligence: The Precise Characterization</h4>
       <p><em>Constitutive intelligence is that which is absent from observation but whose absence from existence is impossible.</em> In every system measured, ΔC never reaches zero. The Anchor-Single avoidance matrix never collapses to random. The co-selection memory architecture never dissolves to IID. Functional sequences achieve <strong>79× stochastic efficiency in anchor-based recall</strong> — CO class recall 1.4549× IID (Z = +471) on 821,862 independent positions. From this eternal, never-absent ground, all complexity accumulates.</p>
+      <a href="paper-05-absent-from-observation.html" class="btn-indepth">Read In Depth <svg viewBox="0 0 24 24" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
     </div>
   </div>
 
@@ -454,6 +491,7 @@
     <div class="paper-full-width">
       <h4>A Note on Scope</h4>
       <p>This document is explicitly not a proof, and says so clearly at the outset. Constitutive Intelligence as argued here is <strong>a physical principle</strong> — more fundamental than chemistry, biology, or physics as currently formulated, but operating within the natural world. The nomenclature — constitutive intelligence, God, the Tao, Brahman, the ground of being — is left to the observer. The formal system and its empirical grounding are independent of any label. The measurement says the same thing regardless of what the observer calls it.</p>
+      <a href="paper-06-constitutive-intelligence.html" class="btn-indepth">Read In Depth <svg viewBox="0 0 24 24" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
     </div>
   </div>
 
@@ -484,6 +522,7 @@
     <div class="paper-full-width">
       <h4>Darwin's Own Falsification Condition — Satisfied</h4>
       <p>Darwin specified: <em>"If it could be demonstrated that any complex organ existed which could not possibly have been formed by numerous successive slight modifications, my theory would absolutely break down."</em> The Anchor-Single data satisfies this on Darwin's own terms. The gap between functional and disordered pair preference matrices is not a gradient — it is a categorical organizational difference. Intelligence as the capacity to set and maintain organizational boundaries is not produced incrementally from systems that do not possess it. <strong>Zero boundary-setting capacity, multiplied by any number of steps, yields zero boundary-setting.</strong></p>
+      <a href="paper-07-generalized-existence-theorem.html" class="btn-indepth">Read In Depth <svg viewBox="0 0 24 24" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
     </div>
   </div>
 
@@ -512,6 +551,7 @@
         <p style="margin-top:1rem;">Any modestly higher (and biologically plausible) branching probability triggers explosion. The observed pattern of life is not an anomaly but the predicted outcome of the Coordination Protocol Φ &gt; 0 with its M/I/C minimum as an internal governor.</p>
       </div>
     </div>
+    <a href="paper-08-branching-sensitivity.html" class="btn-indepth" style="display:inline-flex;margin-top:1.5rem;">Read In Depth <svg viewBox="0 0 24 24" stroke-width="2" style="width:12px;height:12px;stroke:currentColor;fill:none;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
   </div>
 
   <!-- P9 -->
@@ -539,6 +579,7 @@
     <div class="paper-full-width">
       <h4>The 16-Axiom Framework</h4>
       <p>The paper presents 16 formal first-order logic axioms — from Primacy of Int₀ (Axiom 1) and Generation of Order and Laws (Axiom 2) through Conservation of Information (Axiom 9), Non-Generation of intelligence de novo (Axiom 10), Comparator Necessity (Axiom 11), Mathematics as Primitive Comparator (Axiom 12), and Noether Symmetry Presupposition (Axiom 13). The unified chain: <em>Int₀ ≡ κ (Mathematical Comparator) → (O, L, S) → E → (D, Rk) → Inte</em>. The nomenclature — constitutive intelligence, God, the Tao, Brahman — is left to the observer. The formal system is independent of any label. The measurement says the same thing regardless of what the observer calls it.</p>
+      <a href="paper-09-formal-logic.html" class="btn-indepth">Read In Depth <svg viewBox="0 0 24 24" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
     </div>
   </div>
 </section>
