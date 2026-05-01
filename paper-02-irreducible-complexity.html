@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Irreducible Complexity — Natural Organization Institute</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --forest: #1a2e1a; --gold: #b8973a; --gold-light: #d4b45a;
+    --cream: #f5f0e8; --ink: #1a1a1a; --ink-mid: #3a3a3a; --ink-light: #6a6a6a;
+    --rule: #d8d0c0; --bg: #fafaf7; --bg-alt: #f4f1eb; --accent: #2d4a2d;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Source Serif 4', Georgia, serif; background: var(--bg); color: var(--ink); font-size: 17px; line-height: 1.8; }
+  .top-nav { background: var(--forest); padding: 0.9rem 3rem; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; border-bottom: 2px solid var(--gold); }
+  .top-nav-logo { font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.2em; color: rgba(245,240,232,0.7); text-decoration: none; }
+  .top-nav-logo:hover { color: var(--gold); }
+  .top-nav-links { display: flex; gap: 2rem; align-items: center; }
+  .top-nav-links a { font-family: 'Cinzel', serif; font-size: 0.58rem; letter-spacing: 0.15em; color: rgba(245,240,232,0.55); text-decoration: none; transition: color 0.2s; }
+  .top-nav-links a:hover { color: var(--gold); }
+  .download-btn { font-family: 'Cinzel', serif; font-size: 0.58rem; letter-spacing: 0.18em; color: var(--forest); background: var(--gold); padding: 0.5rem 1.2rem; text-decoration: none; transition: background 0.2s; }
+  .download-btn:hover { background: var(--gold-light); }
+  .paper-hero { background: var(--bg-alt); border-bottom: 1px solid var(--rule); padding: 4rem 0 3rem; }
+  .paper-hero-inner { max-width: 860px; margin: 0 auto; padding: 0 3rem; }
+  .paper-series { font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.3em; color: var(--gold); margin-bottom: 1.2rem; }
+  .paper-series::before { content: '— '; } .paper-series::after { content: ' —'; }
+  .paper-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3.5vw, 3rem); font-weight: 400; color: var(--forest); line-height: 1.2; margin-bottom: 1.5rem; }
+  .paper-meta { display: flex; flex-wrap: wrap; gap: 2rem; margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--rule); }
+  .paper-meta-item .label { font-family: 'Cinzel', serif; font-size: 0.52rem; letter-spacing: 0.2em; color: var(--ink-light); display: block; margin-bottom: 0.2rem; }
+  .paper-meta-item .value { font-size: 0.95rem; color: var(--ink-mid); }
+  .paper-meta-item .value em { font-style: italic; }
+  .paper-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-download { font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.18em; color: white; background: var(--forest); padding: 0.75rem 1.8rem; text-decoration: none; transition: background 0.2s; display: inline-flex; align-items: center; gap: 0.5rem; }
+  .btn-download:hover { background: var(--accent); }
+  .btn-download svg { width: 14px; height: 14px; stroke: currentColor; fill: none; }
+  .btn-back { font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.18em; color: var(--ink-mid); background: transparent; padding: 0.75rem 1.8rem; text-decoration: none; border: 1px solid var(--rule); transition: all 0.2s; }
+  .btn-back:hover { border-color: var(--gold); color: var(--gold); }
+  .content-wrap { max-width: 860px; margin: 0 auto; padding: 4rem 3rem; }
+  .toc { background: var(--bg-alt); border: 1px solid var(--rule); border-left: 3px solid var(--gold); padding: 1.8rem 2rem; margin-bottom: 3.5rem; }
+  .toc-title { font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.25em; color: var(--ink-light); margin-bottom: 1rem; }
+  .toc ol { list-style: none; counter-reset: toc; }
+  .toc ol li { counter-increment: toc; padding: 0.3rem 0; }
+  .toc ol li::before { content: counter(toc) ". "; font-family: 'Cinzel', serif; font-size: 0.75rem; color: var(--gold); margin-right: 0.3rem; }
+  .toc ol li a { font-size: 0.95rem; color: var(--ink-mid); text-decoration: none; transition: color 0.2s; }
+  .toc ol li a:hover { color: var(--forest); }
+  .paper-section { margin-bottom: 3.5rem; }
+  .paper-section h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 500; color: var(--forest); margin-bottom: 1.2rem; padding-bottom: 0.6rem; border-bottom: 1px solid var(--rule); }
+  .paper-section h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 500; color: var(--ink); margin: 1.8rem 0 0.8rem; }
+  .paper-section p { margin-bottom: 1.1rem; color: var(--ink-mid); }
+  .paper-section p strong { color: var(--ink); font-weight: 600; }
+  .paper-section p em { font-style: italic; color: var(--accent); }
+  .abstract-box { background: var(--bg-alt); border-left: 3px solid var(--forest); padding: 1.8rem 2rem; margin-bottom: 1.5rem; font-size: 1rem; line-height: 1.85; color: var(--ink-mid); }
+  .abstract-box p { margin-bottom: 0.8rem; }
+  .abstract-box p:last-child { margin-bottom: 0; }
+  .table-wrap { overflow-x: auto; margin: 1.5rem 0 2rem; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+  thead th { font-family: 'Cinzel', serif; font-size: 0.55rem; letter-spacing: 0.15em; color: var(--ink-light); text-align: left; padding: 0.7rem 1rem; border-bottom: 2px solid var(--forest); background: var(--bg-alt); }
+  tbody td { padding: 0.6rem 1rem; border-bottom: 1px solid var(--rule); color: var(--ink-mid); vertical-align: top; }
+  tbody tr:hover { background: var(--bg-alt); }
+  tbody td strong { color: var(--ink); }
+  .table-caption { font-size: 0.85rem; color: var(--ink-light); font-style: italic; margin-top: 0.5rem; text-align: center; }
+  .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin: 2rem 0; }
+  .stat-card { background: var(--forest); padding: 1.5rem; text-align: center; }
+  .stat-card .val { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--gold-light); display: block; line-height: 1.1; }
+  .stat-card .lbl { font-family: 'Cinzel', serif; font-size: 0.5rem; letter-spacing: 0.16em; color: rgba(245,240,232,0.5); margin-top: 0.3rem; display: block; }
+  .finding { background: var(--bg-alt); border: 1px solid var(--rule); border-left: 3px solid var(--gold); padding: 1.2rem 1.5rem; margin: 1.2rem 0; }
+  .finding-num { font-family: 'Cinzel', serif; font-size: 0.52rem; letter-spacing: 0.2em; color: var(--gold); margin-bottom: 0.4rem; }
+  .finding p { margin: 0; font-size: 0.98rem; color: var(--ink-mid); }
+  .finding p strong { color: var(--ink); }
+  .callout { background: #fff8e8; border: 1px solid #e8d48a; border-left: 3px solid var(--gold); padding: 1.2rem 1.5rem; margin: 1.5rem 0; }
+  .callout p { margin: 0; font-size: 0.98rem; color: var(--ink-mid); }
+  .equation { background: var(--bg-alt); border: 1px solid var(--rule); padding: 1.2rem 2rem; text-align: center; font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--forest); margin: 1.5rem 0; font-style: italic; }
+  .keywords { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+  .keyword { font-family: 'Cinzel', serif; font-size: 0.52rem; letter-spacing: 0.15em; color: var(--ink-mid); border: 1px solid var(--rule); padding: 0.3rem 0.8rem; }
+  .paper-nav { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--rule); padding-top: 2.5rem; margin-top: 4rem; }
+  .paper-nav a { font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.15em; color: var(--ink-light); text-decoration: none; transition: color 0.2s; }
+  .paper-nav a:hover { color: var(--gold); }
+  .paper-nav .next { text-align: right; }
+  .paper-nav .label { display: block; font-size: 0.5rem; letter-spacing: 0.2em; color: var(--gold); opacity: 0.7; margin-bottom: 0.3rem; }
+  footer { background: var(--forest); padding: 2rem 3rem; text-align: center; border-top: 2px solid var(--gold); }
+  footer p { font-family: 'Cinzel', serif; font-size: 0.55rem; letter-spacing: 0.2em; color: rgba(245,240,232,0.3); }
+  @media (max-width: 700px) {
+    .top-nav { padding: 0.9rem 1.5rem; }
+    .paper-hero-inner, .content-wrap { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .stat-grid { grid-template-columns: 1fr; }
+    .paper-nav { flex-direction: column; gap: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <a href="index.html" class="top-nav-logo">Natural Organization Institute</a>
+  <div class="top-nav-links">
+    <a href="index.html#papers">All Papers</a>
+    <a href="index.html#contact">Contact</a>
+    <a href="papers/paper-02-irreducible-complexity.pdf" download class="download-btn">Download PDF</a>
+  </div>
+</nav>
+
+<div class="paper-hero">
+  <div class="paper-hero-inner">
+    <p class="paper-series">Paper 02 of 09</p>
+    <h1 class="paper-title">The Irreducible Complexity of Amino Acid Pair Preferences: A 16-Variable Biophysical Hardening Analysis Reveals 78.4% Unexplained Variance in Protein Grammar</h1>
+    <div class="paper-meta">
+      <div class="paper-meta-item"><span class="label">Author</span><span class="value">P.B. Van Slyke</span></div>
+      <div class="paper-meta-item"><span class="label">Institution</span><span class="value">Natural Organization Institute, Lyons, Colorado</span></div>
+      <div class="paper-meta-item"><span class="label">Status</span><span class="value">Natural Organization Institute — 2026</span></div>
+    </div>
+    <div class="paper-actions">
+      <a href="papers/paper-02-irreducible-complexity.pdf" download class="btn-download">
+        <svg viewBox="0 0 24 24" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download PDF
+      </a>
+      <a href="index.html" class="btn-back">← Back to Institute</a>
+    </div>
+  </div>
+</div>
+
+<div class="content-wrap">
+
+  <div class="toc">
+    <p class="toc-title">Contents</p>
+    <ol>
+      <li><a href="#abstract">Abstract</a></li>
+      <li><a href="#introduction">Introduction</a></li>
+      <li><a href="#methods">Methods — The Hardening Protocol</a></li>
+      <li><a href="#results">Results</a></li>
+      <li><a href="#discussion">Discussion</a></li>
+      <li><a href="#limitations">Limitations</a></li>
+      <li><a href="#conclusion">Conclusion</a></li>
+    </ol>
+  </div>
+
+  <div class="paper-section" id="abstract">
+    <h2>Abstract</h2>
+    <div class="abstract-box">
+      <p>The central dogma of structural bioinformatics posits that residue-residue interaction preferences are emergent properties reducible to underlying physicochemical constraints. We challenge this assumption by analyzing over 61 million amino acid pairs across functional (Pfam) and disordered (DisProt) domains.</p>
+      <p>Using a diagnostic Anchor-Single sequential window method coupled with an ordinary least-squares regression controlling for 16 biophysical variables (hydrophobicity, charge, van der Waals radius, substitution matrices, and cross-terms), we demonstrate a persistent explanatory gap. We find that <strong>78.4% of the global pair-preference variance remains unexplained by known chemistry</strong>.</p>
+      <p>Critically, the diagnostic A→N avoidance signal (Z = −87.13) exhibits hardening, strengthening to a residual Z = −90.24 after controlling for all 16 variables. Spatial contact analysis confirms that this signal is directionally consistent across hierarchical levels (r = 0.9232, p &lt; 10⁻¹⁵⁰) but attenuates at physical interfaces. These results falsify the null hypothesis that sequence patterns are fully reducible to local biophysics, suggesting the existence of a systematic, non-local organizational logic orthogonal to current molecular models.</p>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-card"><span class="val">78.4%</span><span class="lbl">Variance Unexplained After 16 Controls</span></div>
+      <div class="stat-card"><span class="val">−90.24</span><span class="lbl">A→N Residual Z (Hardened)</span></div>
+      <div class="stat-card"><span class="val">r = 0.923</span><span class="lbl">1D–3D Directional Agreement</span></div>
+    </div>
+  </div>
+
+  <div class="paper-section" id="introduction">
+    <h2>1. Introduction</h2>
+    <p>The primary objective of protein bioinformatics is to decode the relationship between primary sequence and tertiary structure. Current explanatory frameworks rely on the reductionist assumption that sequence-level patterns are driven solely by localized chemical optimizations: the hydrophobic effect, charge-pairing, and steric hindrance.</p>
+    <p>However, if these properties fully account for the organizational structure of proteins, the statistical signal for any given amino acid pair preference should <strong>diminish or disappear</strong> when those properties are strictly controlled for. The observation of the opposite effect — <em>hardening</em> — would constitute a fundamental anomaly.</p>
+    <p>In this study, we present a "hardening" analysis designed to measure the residual variance of residue-residue interactions. By applying an extensive set of 16 physicochemical and substitutional controls to a massive dataset of functional protein domains, we identify a persistent organizational grammar that remains recalcitrant to reductionist explanation.</p>
+    <div class="callout">
+      <p><strong>The Central Test:</strong> If biophysics were the primary driver, including 16 simultaneous variables should account for a majority of the variance. The observation of the opposite — that the A→N signal <em>strengthens</em> under controls — would constitute a fundamental anomaly in our understanding of protein sequence organization.</p>
+    </div>
+  </div>
+
+  <div class="paper-section" id="methods">
+    <h2>2. Methods — The Hardening Protocol</h2>
+
+    <h3>2.1 Dataset and Pair Selection</h3>
+    <p>We analyzed 61,320,087 residue pairs derived from the Pfam functional domain database, supplemented with 2,000 high-resolution PDB structures for spatial validation (&lt;2.5Å resolution). Control sets were drawn from the DisProt database of intrinsically disordered proteins to distinguish functional organization from stochastic sequence composition (null model).</p>
+
+    <h3>2.2 The 16-Variable Regression Model</h3>
+    <p>We constructed a 16-variable ordinary least-squares (OLS) regression model to predict pair-preference Z-scores. The goal: to "explain away" the signal using physics and evolution.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Category</th><th>Variables Included</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Primary Physicochemical</strong></td><td>Hydrophobicity (Kyte-Doolittle), formal charge (pH 7), molecular weight</td></tr>
+          <tr><td><strong>Secondary Structure Propensity</strong></td><td>Chou-Fasman α-helix, β-sheet, and coil propensities</td></tr>
+          <tr><td><strong>Substitution Matrices</strong></td><td>BLOSUM62 and PAM250 (to absorb evolutionary history)</td></tr>
+          <tr><td><strong>Spatial Geometry</strong></td><td>Van der Waals radius, accessible surface area (ASA), rotatable bonds</td></tr>
+          <tr><td><strong>Cross-Terms</strong></td><td>Hydrophobicity×Charge and Size×Polarity interactions</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>The residual Z-score after regression represents the "unexplained" organizational signal — the portion of pair preference that cannot be attributed to any combination of these known properties.</p>
+  </div>
+
+  <div class="paper-section" id="results">
+    <h2>3. Results</h2>
+
+    <h3>3.1 The Global Explanatory Gap</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Metric</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Number of pairs analyzed</td><td>380</td></tr>
+          <tr><td>Total pair observations</td><td>61,320,087</td></tr>
+          <tr><td>Controls included</td><td>16</td></tr>
+          <tr><td><strong>Model R²</strong></td><td><strong>0.2157</strong></td></tr>
+          <tr><td><strong>Unexplained variance</strong></td><td><strong>78.43%</strong></td></tr>
+          <tr><td>F-statistic</td><td>112.4 (p &lt; 10⁻¹⁵)</td></tr>
+        </tbody>
+      </table>
+      <p class="table-caption">Table 1. Global regression statistics across all 380 amino acid pairs.</p>
+    </div>
+
+    <h3>3.2 The Hardening Effect</h3>
+    <p>The most significant finding: the diagnostic A→N avoidance signal does not weaken under controls. It hardens. This is the opposite of what a reductionist model predicts.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Pair</th><th>Raw Z-Score</th><th>Residual Z (16-Variable)</th><th>Effect</th></tr></thead>
+        <tbody>
+          <tr><td><strong>A→N</strong></td><td><strong>−87.13</strong></td><td><strong>−90.24</strong></td><td><strong>Hardened ↑</strong></td></tr>
+          <tr><td>A→L</td><td>253.43</td><td>216.17</td><td>Weakened ↓</td></tr>
+          <tr><td>E→K</td><td>170.96</td><td>141.67</td><td>Weakened ↓</td></tr>
+          <tr><td>R→L</td><td>148.57</td><td>129.84</td><td>Weakened ↓</td></tr>
+        </tbody>
+      </table>
+      <p class="table-caption">Table 2. Residual hardening of diagnostic pairs. The A→N pair uniquely strengthens after all 16 controls are applied — the opposite of what the reductionist model predicts.</p>
+    </div>
+
+    <h3>3.3 Feature Importance</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Feature</th><th>Standardized Coefficient</th></tr></thead>
+        <tbody>
+          <tr><td>vdW Radius Difference</td><td>28.99</td></tr>
+          <tr><td>Molecular Weight Difference</td><td>−18.73</td></tr>
+          <tr><td>ASA Difference</td><td>−10.08</td></tr>
+          <tr><td>Hydrophobicity Difference</td><td>9.46</td></tr>
+          <tr><td>Sheet Propensity Difference</td><td>8.61</td></tr>
+        </tbody>
+      </table>
+      <p class="table-caption">Table 3. Top 5 standardized coefficients in the 16-variable model. No single biophysical feature dominates, indicating the residual signal is not merely a "missing" single variable.</p>
+    </div>
+
+    <h3>3.4 Spatial Contact Validation</h3>
+    <p>To confirm the sequence-level signal corresponds to physical reality, 842,498 inter-chain contacts (3D interfaces) were analyzed versus linear sequence windows (1D).</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Context</th><th>R² (Biophysics)</th><th>Unexplained Variance</th></tr></thead>
+        <tbody>
+          <tr><td>Protein Surface (Intra-chain)</td><td>0.612</td><td>38.8%</td></tr>
+          <tr><td><strong>Protein Interface (Inter-chain)</strong></td><td><strong>0.513</strong></td><td><strong>48.7%</strong></td></tr>
+          <tr><td>Homodimer Contacts</td><td>0.489</td><td>51.1%</td></tr>
+        </tbody>
+      </table>
+      <p class="table-caption">Table 4. Unexplained variance is higher at interfaces than surfaces — the opposite of what standard structural constraint models predict. Pearson r = 0.9232 (p &lt; 10⁻¹⁵⁰) between 1D and 3D Z-scores confirms directional agreement.</p>
+    </div>
+  </div>
+
+  <div class="paper-section" id="discussion">
+    <h2>4. Discussion</h2>
+
+    <h3>4.1 The Failure of Reducibility</h3>
+    <p>The persistence of the A→N avoidance signal and the high global residual variance (78.4%) presents a direct challenge to the reducibility assumption in molecular biology. If biophysics were the primary driver, the inclusion of 16 simultaneous variables — including substitution matrices that capture deep evolutionary history — should account for a majority of the variance. <strong>It does not.</strong></p>
+    <p>The observed hardening suggests that functional protein sequences are governed by an organizational logic currently absent from standard biophysical models. The absence of this signal in disordered sequences confirms that this is a signature of functional biological organization rather than a statistical artifact of amino acid composition.</p>
+
+    <h3>4.2 What Could the Missing Variable Be?</h3>
+    <p>Three non-exclusive hypotheses are proposed for the missing 78.4%:</p>
+    <div class="finding">
+      <p class="finding-num">Hypothesis 01 — Non-local Effects</p>
+      <p>Electron tunneling or dispersion forces acting across distances &gt;5Å not captured by standard force fields. These effects operate at the quantum level and are not represented in any of the 16 control variables.</p>
+    </div>
+    <div class="finding">
+      <p class="finding-num">Hypothesis 02 — Evolutionary Tiling</p>
+      <p>A "grammar" where pairs are selected for <strong>digital information storage</strong> (error correction) rather than structural stability. Under this model, pair preferences encode functional information in a way that is orthogonal to local chemistry.</p>
+    </div>
+    <div class="finding">
+      <p class="finding-num">Hypothesis 03 — Hydration Dynamics</p>
+      <p>Time-dependent water exclusion effects not captured by static hydrophobicity scales. The dynamic behavior of the hydration shell around amino acid pairs may impose constraints invisible to equilibrium measurements.</p>
+    </div>
+  </div>
+
+  <div class="paper-section" id="limitations">
+    <h2>5. Limitations</h2>
+    <p>While the 16-variable model is extensive, it is not exhaustive. Temperature-dependent factors, pH-dependent titration states beyond standard pKa, and explicit solvent models were not included. However, the magnitude of the residual (78.4%) suggests that adding these missing variables is unlikely to reduce the unexplained variance to zero.</p>
+    <p>Furthermore, the inclusion of BLOSUM62 implicitly absorbs many unknown historical constraints — and the signal survives. This makes artifact explanations substantially less plausible than they would otherwise be.</p>
+  </div>
+
+  <div class="paper-section" id="conclusion">
+    <h2>6. Conclusion</h2>
+    <p>This study quantifies a significant explanatory deficit in the biophysical modeling of protein sequences. We conclude that functional domains exhibit a robust, non-random organizational grammar that is orthogonal to known chemistry and directionally consistent across hierarchical structural levels.</p>
+    <p>The hardening of the A→N signal under 16 controls is not a marginal result — it is a categorical anomaly relative to reductionist predictions. Future research should focus on identifying the origin of this missing organizational variable, potentially requiring a revision of the physicochemical foundations of structural biology.</p>
+  </div>
+
+  <div class="paper-nav">
+    <div class="prev">
+      <a href="paper-01-anchor-single.html"><span class="label">← Previous Paper</span>Anchor-Single Analysis</a>
+    </div>
+    <div class="next">
+      <a href="paper-03-efficiency-gradient.html"><span class="label">Next Paper →</span>Efficiency Gradient</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>Natural Organization Institute &nbsp;|&nbsp; Lyons, Colorado &nbsp;|&nbsp; van.slyke@naturalorganization.org &nbsp;|&nbsp; naturalorganization.org</p>
+</footer>
+</body>
+</html>

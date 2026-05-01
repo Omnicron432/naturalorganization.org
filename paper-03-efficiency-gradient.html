@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Efficiency Gradient — Natural Organization Institute</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --forest: #1a2e1a; --gold: #b8973a; --gold-light: #d4b45a;
+    --cream: #f5f0e8; --ink: #1a1a1a; --ink-mid: #3a3a3a; --ink-light: #6a6a6a;
+    --rule: #d8d0c0; --bg: #fafaf7; --bg-alt: #f4f1eb; --accent: #2d4a2d;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Source Serif 4', Georgia, serif; background: var(--bg); color: var(--ink); font-size: 17px; line-height: 1.8; }
+  .top-nav { background: var(--forest); padding: 0.9rem 3rem; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; border-bottom: 2px solid var(--gold); }
+  .top-nav-logo { font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.2em; color: rgba(245,240,232,0.7); text-decoration: none; }
+  .top-nav-logo:hover { color: var(--gold); }
+  .top-nav-links { display: flex; gap: 2rem; align-items: center; }
+  .top-nav-links a { font-family: 'Cinzel', serif; font-size: 0.58rem; letter-spacing: 0.15em; color: rgba(245,240,232,0.55); text-decoration: none; transition: color 0.2s; }
+  .top-nav-links a:hover { color: var(--gold); }
+  .download-btn { font-family: 'Cinzel', serif; font-size: 0.58rem; letter-spacing: 0.18em; color: var(--forest); background: var(--gold); padding: 0.5rem 1.2rem; text-decoration: none; transition: background 0.2s; }
+  .download-btn:hover { background: var(--gold-light); }
+  .paper-hero { background: var(--bg-alt); border-bottom: 1px solid var(--rule); padding: 4rem 0 3rem; }
+  .paper-hero-inner { max-width: 860px; margin: 0 auto; padding: 0 3rem; }
+  .paper-series { font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.3em; color: var(--gold); margin-bottom: 1.2rem; }
+  .paper-series::before { content: '— '; } .paper-series::after { content: ' —'; }
+  .paper-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3.5vw, 3rem); font-weight: 400; color: var(--forest); line-height: 1.2; margin-bottom: 1.5rem; }
+  .paper-meta { display: flex; flex-wrap: wrap; gap: 2rem; margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--rule); }
+  .paper-meta-item .label { font-family: 'Cinzel', serif; font-size: 0.52rem; letter-spacing: 0.2em; color: var(--ink-light); display: block; margin-bottom: 0.2rem; }
+  .paper-meta-item .value { font-size: 0.95rem; color: var(--ink-mid); }
+  .paper-meta-item .value em { font-style: italic; }
+  .paper-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-download { font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.18em; color: white; background: var(--forest); padding: 0.75rem 1.8rem; text-decoration: none; transition: background 0.2s; display: inline-flex; align-items: center; gap: 0.5rem; }
+  .btn-download:hover { background: var(--accent); }
+  .btn-download svg { width: 14px; height: 14px; stroke: currentColor; fill: none; }
+  .btn-back { font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.18em; color: var(--ink-mid); background: transparent; padding: 0.75rem 1.8rem; text-decoration: none; border: 1px solid var(--rule); transition: all 0.2s; }
+  .btn-back:hover { border-color: var(--gold); color: var(--gold); }
+  .content-wrap { max-width: 860px; margin: 0 auto; padding: 4rem 3rem; }
+  .toc { background: var(--bg-alt); border: 1px solid var(--rule); border-left: 3px solid var(--gold); padding: 1.8rem 2rem; margin-bottom: 3.5rem; }
+  .toc-title { font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.25em; color: var(--ink-light); margin-bottom: 1rem; }
+  .toc ol { list-style: none; counter-reset: toc; }
+  .toc ol li { counter-increment: toc; padding: 0.3rem 0; }
+  .toc ol li::before { content: counter(toc) ". "; font-family: 'Cinzel', serif; font-size: 0.75rem; color: var(--gold); margin-right: 0.3rem; }
+  .toc ol li a { font-size: 0.95rem; color: var(--ink-mid); text-decoration: none; transition: color 0.2s; }
+  .toc ol li a:hover { color: var(--forest); }
+  .paper-section { margin-bottom: 3.5rem; }
+  .paper-section h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 500; color: var(--forest); margin-bottom: 1.2rem; padding-bottom: 0.6rem; border-bottom: 1px solid var(--rule); }
+  .paper-section h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 500; color: var(--ink); margin: 1.8rem 0 0.8rem; }
+  .paper-section p { margin-bottom: 1.1rem; color: var(--ink-mid); }
+  .paper-section p strong { color: var(--ink); font-weight: 600; }
+  .paper-section p em { font-style: italic; color: var(--accent); }
+  .abstract-box { background: var(--bg-alt); border-left: 3px solid var(--forest); padding: 1.8rem 2rem; margin-bottom: 1.5rem; font-size: 1rem; line-height: 1.85; color: var(--ink-mid); }
+  .abstract-box p { margin-bottom: 0.8rem; }
+  .abstract-box p:last-child { margin-bottom: 0; }
+  .table-wrap { overflow-x: auto; margin: 1.5rem 0 2rem; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+  thead th { font-family: 'Cinzel', serif; font-size: 0.55rem; letter-spacing: 0.15em; color: var(--ink-light); text-align: left; padding: 0.7rem 1rem; border-bottom: 2px solid var(--forest); background: var(--bg-alt); }
+  tbody td { padding: 0.6rem 1rem; border-bottom: 1px solid var(--rule); color: var(--ink-mid); vertical-align: top; }
+  tbody tr:hover { background: var(--bg-alt); }
+  tbody td strong { color: var(--ink); }
+  .table-caption { font-size: 0.85rem; color: var(--ink-light); font-style: italic; margin-top: 0.5rem; text-align: center; }
+  .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin: 2rem 0; }
+  .stat-card { background: var(--forest); padding: 1.5rem; text-align: center; }
+  .stat-card .val { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--gold-light); display: block; line-height: 1.1; }
+  .stat-card .lbl { font-family: 'Cinzel', serif; font-size: 0.5rem; letter-spacing: 0.16em; color: rgba(245,240,232,0.5); margin-top: 0.3rem; display: block; }
+  .finding { background: var(--bg-alt); border: 1px solid var(--rule); border-left: 3px solid var(--gold); padding: 1.2rem 1.5rem; margin: 1.2rem 0; }
+  .finding-num { font-family: 'Cinzel', serif; font-size: 0.52rem; letter-spacing: 0.2em; color: var(--gold); margin-bottom: 0.4rem; }
+  .finding p { margin: 0; font-size: 0.98rem; color: var(--ink-mid); }
+  .finding p strong { color: var(--ink); }
+  .callout { background: #fff8e8; border: 1px solid #e8d48a; border-left: 3px solid var(--gold); padding: 1.2rem 1.5rem; margin: 1.5rem 0; }
+  .callout p { margin: 0; font-size: 0.98rem; color: var(--ink-mid); }
+  .model-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 1.5rem 0; }
+  .model-col { padding: 1.5rem; border: 1px solid var(--rule); }
+  .model-col h4 { font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.18em; color: var(--ink-light); margin-bottom: 1rem; }
+  .model-col ul { list-style: none; }
+  .model-col ul li { padding: 0.4rem 0; border-bottom: 1px solid var(--rule); font-size: 0.92rem; color: var(--ink-mid); }
+  .model-col ul li:last-child { border-bottom: none; }
+  .model-col.fim { border-color: var(--gold); background: var(--bg-alt); }
+  .model-col.fim h4 { color: var(--gold); }
+  .keywords { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+  .keyword { font-family: 'Cinzel', serif; font-size: 0.52rem; letter-spacing: 0.15em; color: var(--ink-mid); border: 1px solid var(--rule); padding: 0.3rem 0.8rem; }
+  .paper-nav { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--rule); padding-top: 2.5rem; margin-top: 4rem; }
+  .paper-nav a { font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.15em; color: var(--ink-light); text-decoration: none; transition: color 0.2s; }
+  .paper-nav a:hover { color: var(--gold); }
+  .paper-nav .next { text-align: right; }
+  .paper-nav .label { display: block; font-size: 0.5rem; letter-spacing: 0.2em; color: var(--gold); opacity: 0.7; margin-bottom: 0.3rem; }
+  footer { background: var(--forest); padding: 2rem 3rem; text-align: center; border-top: 2px solid var(--gold); }
+  footer p { font-family: 'Cinzel', serif; font-size: 0.55rem; letter-spacing: 0.2em; color: rgba(245,240,232,0.3); }
+  @media (max-width: 700px) {
+    .top-nav { padding: 0.9rem 1.5rem; }
+    .paper-hero-inner, .content-wrap { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .stat-grid, .model-compare { grid-template-columns: 1fr; }
+    .paper-nav { flex-direction: column; gap: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <a href="index.html" class="top-nav-logo">Natural Organization Institute</a>
+  <div class="top-nav-links">
+    <a href="index.html#papers">All Papers</a>
+    <a href="index.html#contact">Contact</a>
+    <a href="papers/paper-03-efficiency-gradient.pdf" download class="download-btn">Download PDF</a>
+  </div>
+</nav>
+
+<div class="paper-hero">
+  <div class="paper-hero-inner">
+    <p class="paper-series">Paper 03 of 09</p>
+    <h1 class="paper-title">The Functional Inheritance Model: Sequence-Level Grammar as Generative Constraint in Protein Organization</h1>
+    <div class="paper-meta">
+      <div class="paper-meta-item"><span class="label">Author</span><span class="value">P.B. Van Slyke</span></div>
+      <div class="paper-meta-item"><span class="label">Institution</span><span class="value">Natural Organization Institute, Lyons, Colorado</span></div>
+      <div class="paper-meta-item"><span class="label">Status</span><span class="value">Natural Organization Institute — 2026</span></div>
+    </div>
+    <div class="paper-actions">
+      <a href="papers/paper-03-efficiency-gradient.pdf" download class="btn-download">
+        <svg viewBox="0 0 24 24" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download PDF
+      </a>
+      <a href="index.html" class="btn-back">← Back to Institute</a>
+    </div>
+  </div>
+</div>
+
+<div class="content-wrap">
+
+  <div class="toc">
+    <p class="toc-title">Contents</p>
+    <ol>
+      <li><a href="#abstract">Abstract</a></li>
+      <li><a href="#introduction">Introduction — The Inverted Gradient</a></li>
+      <li><a href="#methods">Methods</a></li>
+      <li><a href="#results">Results</a></li>
+      <li><a href="#model">The Functional Inheritance Model</a></li>
+      <li><a href="#discussion">Discussion</a></li>
+      <li><a href="#predictions">Testable Predictions</a></li>
+      <li><a href="#conclusion">Conclusion</a></li>
+    </ol>
+  </div>
+
+  <div class="paper-section" id="abstract">
+    <h2>Abstract</h2>
+    <div class="abstract-box">
+      <p>Analysis of 2,000 PDB structures, with filtered subsets of obligate homodimers (80,029 interface pairs) and SIFTS-confirmed enzyme interfaces (138,999 interface pairs), reveals a directionally consistent pattern of organizational signal across hierarchical levels.</p>
+      <p>The diagnostic pair A→N shows Z-scores of −87.13 at the sequence level (Pfam functional domains), −8.80 at enzyme non-interface surfaces, and −2.91 at enzyme protein-protein interfaces. After simultaneous ordinary least-squares regression against six biophysical and substitutional controls, <strong>97.7% of the A→N signal at the sequence level remains</strong>, demonstrating near-complete orthogonality to known amino acid chemistry.</p>
+      <p>The directional consistency across independent measurement approaches — signal strongest where organizational rules are established, attenuating where they are executed — is consistent with the <strong>Functional Inheritance Model</strong> proposed here, in which sequence-level grammar pre-positions viable organizational solutions that are inherited and utilized at the structural level. This model generates testable predictions including rapid adaptive responses on ecological timescales through selection among pre-existing grammatical possibilities.</p>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-card"><span class="val">97.7%</span><span class="lbl">A→N Signal Surviving 6 Controls</span></div>
+      <div class="stat-card"><span class="val">−87.13</span><span class="lbl">Sequence-Level Z (Strongest)</span></div>
+      <div class="stat-card"><span class="val">0.923</span><span class="lbl">Interface–Surface Pearson r</span></div>
+    </div>
+  </div>
+
+  <div class="paper-section" id="introduction">
+    <h2>1. Introduction — The Inverted Gradient</h2>
+    <p>Standard accounts of molecular evolution assume that functional constraint intensifies at sites of direct biological function: protein-protein interfaces and enzyme active sites. Under this view, sequence-level patterns are presumed to be weak, diffuse, or merely neutral background.</p>
+    <p>The present analysis tests this assumption directly across three organizational levels using independent measurement approaches. The conventional prediction is straightforward:</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Level</th><th>Conventional Prediction</th></tr></thead>
+        <tbody>
+          <tr><td>Interface</td><td>Strongest constraint</td></tr>
+          <tr><td>Surface</td><td>Moderate constraint</td></tr>
+          <tr><td>Sequence</td><td>Weakest constraint</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout">
+      <p><strong>The data presented here are inconsistent with this prediction.</strong> The organizational signal is strongest at the sequence level and attenuates at the structural levels. This pattern is observed across all subsets tested and is interpreted as consistent with an alternative model — the Functional Inheritance Model — described in Section 5.</p>
+    </div>
+  </div>
+
+  <div class="paper-section" id="methods">
+    <h2>2. Methods</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Dataset</th><th>N</th><th>Method</th></tr></thead>
+        <tbody>
+          <tr><td>Full PDB set</td><td>2,000 structures (Interactome3D 2024_12)</td><td>Sequential window (Anchor-Single)</td></tr>
+          <tr><td>Obligate homodimers</td><td>80,029 interface pairs; 159,274 non-interface</td><td>Sequential window (Anchor-Single)</td></tr>
+          <tr><td>Enzyme interfaces (SIFTS)</td><td>138,999 interface pairs; 802,673 non-interface</td><td>Sequential window (Anchor-Single)</td></tr>
+          <tr><td>Sequence reference</td><td>61,320,087 pairs (Pfam vs DisProt)</td><td>Sequential window (Anchor-Single)</td></tr>
+          <tr><td>Spatial contacts</td><td>842,498 inter-chain; 4,243,476 intra-chain</td><td>Direct atomic contact (5.0Å cutoff)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Enzyme structures were identified using SIFTS PDB-to-EC mapping (EBI, 2026 release), yielding 135,245 confirmed enzyme PDB IDs cross-referenced against the Interactome3D representative dataset. 6,292 unique enzyme chain pairs were used.</p>
+    <p><strong>Biophysical controls:</strong> Kyte-Doolittle hydrophobicity difference, formal charge difference, molecular weight difference, Chou-Fasman α-helix propensity, Chou-Fasman β-sheet propensity, and BLOSUM62 substitution score. All features standardized before regression.</p>
+  </div>
+
+  <div class="paper-section" id="results">
+    <h2>3. Results</h2>
+
+    <h3>3.1 Directional Pattern Across Levels</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Level</th><th>Context</th><th>A→N Z-Score</th><th>Mean |Z|</th><th>Role (Proposed)</th></tr></thead>
+        <tbody>
+          <tr><td><strong>I. Sequence</strong></td><td>Pfam Functional Domains</td><td><strong>−87.13</strong></td><td>High</td><td>Grammar established</td></tr>
+          <tr><td>II. Surface</td><td>Enzyme Non-Interface</td><td>−8.80</td><td>4.165</td><td>Rules expressed</td></tr>
+          <tr><td>III. Interface</td><td>Homodimer Interfaces</td><td>−2.30</td><td>1.648</td><td>Rules utilized</td></tr>
+          <tr><td>III. Interface</td><td>Enzyme Interfaces (SIFTS)</td><td>−2.91</td><td>1.872</td><td>Rules utilized</td></tr>
+        </tbody>
+      </table>
+      <p class="table-caption">Table 1. A→N Z-scores across organizational levels from methodologically independent analyses. Absolute magnitudes are not directly comparable across levels due to differences in method, dataset, and null model. The directional pattern is the primary finding.</p>
+    </div>
+
+    <h3>3.2 Signal Strength Comparison</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Context</th><th>Interface Mean |Z|</th><th>Surface Mean |Z|</th><th>Ratio (I/S)</th></tr></thead>
+        <tbody>
+          <tr><td>Full PDB set (2,000)</td><td>1.332</td><td>2.671</td><td>0.499</td></tr>
+          <tr><td>Obligate homodimers</td><td>1.648</td><td>2.020</td><td>0.816</td></tr>
+          <tr><td>Enzyme interfaces (SIFTS)</td><td>1.872</td><td>4.165</td><td>0.449</td></tr>
+        </tbody>
+      </table>
+      <p class="table-caption">Table 2. In every subset, the interface-to-surface ratio is below 1.0 — signal is always weaker at interfaces than at surfaces.</p>
+    </div>
+
+    <h3>3.3 Orthogonality to Known Biophysics</h3>
+    <p>After simultaneous regression against six physicochemical and substitutional controls, <strong>97.7% of the sequence-level A→N signal remains</strong> (R² = 0.0995). The residual Z-score of −87.33 after controls essentially equals the raw value of −87.13, confirming near-complete orthogonality to all tested biophysical properties.</p>
+
+    <h3>3.4 Preference Concentration Analysis</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Level</th><th>Top-10 Pairs Share</th><th>Gini Coefficient</th></tr></thead>
+        <tbody>
+          <tr><td>Sequence level</td><td>16.5%</td><td>0.46</td></tr>
+          <tr><td>Intra-chain surfaces</td><td>29.1%</td><td>—</td></tr>
+          <tr><td>Inter-chain interfaces</td><td>54.5%</td><td>0.64</td></tr>
+        </tbody>
+      </table>
+      <p class="table-caption">Table 3. Organizational signal concentrates in a smaller set of chemically coherent pair types at the interface level. Gini coefficient increases monotonically from sequence to interface.</p>
+    </div>
+
+    <h3>3.5 Bonferroni Significance Patterns</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Subset</th><th>Significant at Interface</th><th>Significant at Surface</th></tr></thead>
+        <tbody>
+          <tr><td>Full PDB set</td><td>5/380</td><td>89/380</td></tr>
+          <tr><td>Obligate homodimers</td><td>32/380</td><td>49/380</td></tr>
+          <tr><td>Enzyme interfaces (SIFTS)</td><td>44/380</td><td>149/380</td></tr>
+        </tbody>
+      </table>
+      <p class="table-caption">Table 4. Surfaces yield more significant pairs than interfaces in all subsets — further evidence that organizational signal is stronger upstream.</p>
+    </div>
+  </div>
+
+  <div class="paper-section" id="model">
+    <h2>4. The Functional Inheritance Model</h2>
+    <p>The Functional Inheritance Model is proposed as an interpretation consistent with the data rather than a conclusion proven by it. It makes specific testable predictions that distinguish it from the standard gradualist account.</p>
+
+    <h3>4.1 Core Propositions</h3>
+    <div class="finding">
+      <p class="finding-num">Proposition 1 — Non-Redundant Hierarchy</p>
+      <p>Organizational constraint is established at the sequence level and inherited downstream. Interfaces utilize pre-positioned materials rather than regenerating the grammar independently.</p>
+    </div>
+    <div class="finding">
+      <p class="finding-num">Proposition 2 — Pre-Positioned Feedstock</p>
+      <p>The 97.7% residual signal after physicochemical controls demonstrates that viable organizational solutions exist within the sequence-level grammar. Whether this constitutes a pre-positioned feedstock for adaptation is an empirical question the model generates, not a conclusion the current data establishes.</p>
+    </div>
+    <div class="finding">
+      <p class="finding-num">Proposition 3 — Efficiency Through Inheritance</p>
+      <p>The directional pattern — stronger signal upstream, attenuating downstream — is consistent with a non-redundant hierarchical system. The same pattern could arise from other mechanisms including differential selective pressure across organizational levels.</p>
+    </div>
+
+    <h3>4.2 Standard Model vs. Functional Inheritance Model</h3>
+    <div class="model-compare">
+      <div class="model-col">
+        <h4>Standard Gradualist Account</h4>
+        <ul>
+          <li>Strongest constraint at interfaces</li>
+          <li>Interfaces generate novel grammar</li>
+          <li>Adaptation requires new mutations</li>
+          <li>Incremental, memoryless variation</li>
+        </ul>
+      </div>
+      <div class="model-col fim">
+        <h4>Functional Inheritance Model</h4>
+        <ul>
+          <li>Strongest constraint at sequence level</li>
+          <li>Interfaces inherit pre-existing grammar</li>
+          <li>Adaptation may reveal latent grammatical possibilities</li>
+          <li>Variation on pre-structured substrate</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="paper-section" id="discussion">
+    <h2>5. Discussion</h2>
+
+    <h3>5.1 What the Data Establish</h3>
+    <p>Three findings are established with confidence. First, sequence-level amino acid pair preferences contain structured signal that is 97.7% orthogonal to six standard physicochemical controls at the diagnostic A→N pair. Second, this signal shows a directionally consistent pattern of attenuation from sequence to surface to interface across all subsets tested. Third, the preference architecture is coherent across structural levels (Pearson r = 0.923 between interface and surface Z-scores), indicating that the same pairs are generally preferred and avoided at both levels.</p>
+
+    <h3>5.2 What the Data Do Not Establish</h3>
+    <p>The data do not establish that the gradient reflects causal inheritance of organizational grammar from sequence to structure. The measurements come from methodologically distinct analyses and the directional pattern, while consistent, could reflect differential selective pressure, sampling differences, or other factors not captured by the current framework. The Functional Inheritance Model is a coherent interpretation of the pattern; it is not the only interpretation.</p>
+
+    <h3>5.3 Interpretive Caution on Interface Concentration</h3>
+    <p>The preference concentration at interfaces is dominated by charge-complementarity pairs (E↔R, D↔R, E↔K, D↔K), which are well-characterized biophysical interactions. The biophysical regression explains 51.3% of interface signal, substantially more than the 10% explained at the sequence level. The interface concentration finding is real but reflects known chemistry becoming dominant as well as any organizational inheritance effect.</p>
+  </div>
+
+  <div class="paper-section" id="predictions">
+    <h2>6. Testable Predictions</h2>
+    <p>The Functional Inheritance Model generates several testable predictions that distinguish it from the standard account:</p>
+    <div class="finding">
+      <p class="finding-num">Prediction 01</p>
+      <p>The 97.7% residual should replicate across independent protein families and fold types not included in Pfam or Interactome3D.</p>
+    </div>
+    <div class="finding">
+      <p class="finding-num">Prediction 02</p>
+      <p>Interfaces that are evolutionarily young should show weaker organizational signal than ancient interfaces.</p>
+    </div>
+    <div class="finding">
+      <p class="finding-num">Prediction 03</p>
+      <p>The directional pattern should hold in datasets independent of Pfam and Interactome3D.</p>
+    </div>
+    <div class="finding">
+      <p class="finding-num">Prediction 04 — Ecological Timescale Adaptation</p>
+      <p>If sequence-level grammar pre-positions viable organizational solutions, <strong>adaptive responses to environmental change should be observable on ecological timescales without requiring new mutations</strong>. Darwin's finches — where beak morphology changes measurably within one to two generations following environmental pressure — are consistent with this prediction. Whether this reflects selection among pre-existing grammatical possibilities remains to be established through direct empirical investigation.</p>
+    </div>
+  </div>
+
+  <div class="paper-section" id="conclusion">
+    <h2>7. Conclusion</h2>
+    <p>The Anchor-Single pair analyses reveal a directionally consistent pattern across sequence and structural levels: organizational signal is strongest at the sequence level and attenuates progressively at structural levels. The sequence-level signal is 97.7% orthogonal to six biophysical controls at the diagnostic A→N pair.</p>
+    <p>These findings are consistent with the Functional Inheritance Model, in which sequence-level grammar pre-positions viable organizational solutions that are inherited and utilized at the structural level. The data do not identify the ultimate source of the sequence-level grammar, nor do they prove that the gradient reflects causal inheritance rather than other mechanisms.</p>
+    <p>They demonstrate that functional protein sequences operate under a structured, non-random framework that is strongest at the sequence level and that current physicochemical models are substantially insufficient to account for. The methodological contributions — the Anchor-Single pair framework, the biophysical hardening procedure, and the cross-level directional analysis — provide tools for further investigation into the origin and maintenance of biological organizational grammar.</p>
+  </div>
+
+  <div class="paper-nav">
+    <div class="prev">
+      <a href="paper-02-irreducible-complexity.html"><span class="label">← Previous Paper</span>Irreducible Complexity</a>
+    </div>
+    <div class="next">
+      <a href="paper-04-natural-organization.html"><span class="label">Next Paper →</span>Natural Organization (NOI)</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>Natural Organization Institute &nbsp;|&nbsp; Lyons, Colorado &nbsp;|&nbsp; van.slyke@naturalorganization.org &nbsp;|&nbsp; naturalorganization.org</p>
+</footer>
+</body>
+</html>
