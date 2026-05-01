@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generalized Existence Theorem — Natural Organization Institute</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --forest: #1a2e1a; --gold: #b8973a; --gold-light: #d4b45a;
+    --ink: #1a1a1a; --ink-mid: #3a3a3a; --ink-light: #6a6a6a;
+    --rule: #d8d0c0; --bg: #fafaf7; --bg-alt: #f4f1eb; --accent: #2d4a2d;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Source Serif 4', Georgia, serif; background: var(--bg); color: var(--ink); font-size: 17px; line-height: 1.8; }
+  .top-nav { background: var(--forest); padding: 0.9rem 3rem; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; border-bottom: 2px solid var(--gold); }
+  .top-nav-logo { font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.2em; color: rgba(245,240,232,0.7); text-decoration: none; }
+  .top-nav-logo:hover { color: var(--gold); }
+  .top-nav-links { display: flex; gap: 2rem; align-items: center; }
+  .top-nav-links a { font-family: 'Cinzel', serif; font-size: 0.58rem; letter-spacing: 0.15em; color: rgba(245,240,232,0.55); text-decoration: none; transition: color 0.2s; }
+  .top-nav-links a:hover { color: var(--gold); }
+  .download-btn { font-family: 'Cinzel', serif; font-size: 0.58rem; letter-spacing: 0.18em; color: var(--forest); background: var(--gold); padding: 0.5rem 1.2rem; text-decoration: none; transition: background 0.2s; }
+  .download-btn:hover { background: var(--gold-light); }
+  .paper-hero { background: var(--bg-alt); border-bottom: 1px solid var(--rule); padding: 4rem 0 3rem; }
+  .paper-hero-inner { max-width: 860px; margin: 0 auto; padding: 0 3rem; }
+  .paper-series { font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.3em; color: var(--gold); margin-bottom: 1.2rem; }
+  .paper-series::before { content: '— '; } .paper-series::after { content: ' —'; }
+  .paper-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3.5vw, 3rem); font-weight: 400; color: var(--forest); line-height: 1.2; margin-bottom: 1.5rem; }
+  .paper-meta { display: flex; flex-wrap: wrap; gap: 2rem; margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--rule); }
+  .paper-meta-item .label { font-family: 'Cinzel', serif; font-size: 0.52rem; letter-spacing: 0.2em; color: var(--ink-light); display: block; margin-bottom: 0.2rem; }
+  .paper-meta-item .value { font-size: 0.95rem; color: var(--ink-mid); }
+  .paper-meta-item .value em { font-style: italic; }
+  .paper-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-download { font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.18em; color: white; background: var(--forest); padding: 0.75rem 1.8rem; text-decoration: none; transition: background 0.2s; display: inline-flex; align-items: center; gap: 0.5rem; }
+  .btn-download:hover { background: var(--accent); }
+  .btn-download svg { width: 14px; height: 14px; stroke: currentColor; fill: none; }
+  .btn-back { font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.18em; color: var(--ink-mid); background: transparent; padding: 0.75rem 1.8rem; text-decoration: none; border: 1px solid var(--rule); transition: all 0.2s; }
+  .btn-back:hover { border-color: var(--gold); color: var(--gold); }
+  .content-wrap { max-width: 860px; margin: 0 auto; padding: 4rem 3rem; }
+  .toc { background: var(--bg-alt); border: 1px solid var(--rule); border-left: 3px solid var(--gold); padding: 1.8rem 2rem; margin-bottom: 3.5rem; }
+  .toc-title { font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.25em; color: var(--ink-light); margin-bottom: 1rem; }
+  .toc ol { list-style: none; counter-reset: toc; }
+  .toc ol li { counter-increment: toc; padding: 0.3rem 0; }
+  .toc ol li::before { content: counter(toc) ". "; font-family: 'Cinzel', serif; font-size: 0.75rem; color: var(--gold); margin-right: 0.3rem; }
+  .toc ol li a { font-size: 0.95rem; color: var(--ink-mid); text-decoration: none; transition: color 0.2s; }
+  .toc ol li a:hover { color: var(--forest); }
+  .paper-section { margin-bottom: 3.5rem; }
+  .paper-section h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 500; color: var(--forest); margin-bottom: 1.2rem; padding-bottom: 0.6rem; border-bottom: 1px solid var(--rule); }
+  .paper-section h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 500; color: var(--ink); margin: 1.8rem 0 0.8rem; }
+  .paper-section p { margin-bottom: 1.1rem; color: var(--ink-mid); }
+  .paper-section p strong { color: var(--ink); font-weight: 600; }
+  .paper-section p em { font-style: italic; color: var(--accent); }
+  .abstract-box { background: var(--bg-alt); border-left: 3px solid var(--forest); padding: 1.8rem 2rem; margin-bottom: 1.5rem; font-size: 1rem; line-height: 1.85; color: var(--ink-mid); }
+  .abstract-box p { margin-bottom: 0.8rem; } .abstract-box p:last-child { margin-bottom: 0; }
+  .table-wrap { overflow-x: auto; margin: 1.5rem 0 2rem; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+  thead th { font-family: 'Cinzel', serif; font-size: 0.55rem; letter-spacing: 0.15em; color: var(--ink-light); text-align: left; padding: 0.7rem 1rem; border-bottom: 2px solid var(--forest); background: var(--bg-alt); }
+  tbody td { padding: 0.6rem 1rem; border-bottom: 1px solid var(--rule); color: var(--ink-mid); vertical-align: top; }
+  tbody tr:hover { background: var(--bg-alt); }
+  tbody td strong { color: var(--ink); }
+  .table-caption { font-size: 0.85rem; color: var(--ink-light); font-style: italic; margin-top: 0.5rem; text-align: center; }
+  .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin: 2rem 0; }
+  .stat-card { background: var(--forest); padding: 1.5rem; text-align: center; }
+  .stat-card .val { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--gold-light); display: block; line-height: 1.1; }
+  .stat-card .lbl { font-family: 'Cinzel', serif; font-size: 0.5rem; letter-spacing: 0.16em; color: rgba(245,240,232,0.5); margin-top: 0.3rem; display: block; }
+  .finding { background: var(--bg-alt); border: 1px solid var(--rule); border-left: 3px solid var(--gold); padding: 1.2rem 1.5rem; margin: 1.2rem 0; }
+  .finding-num { font-family: 'Cinzel', serif; font-size: 0.52rem; letter-spacing: 0.2em; color: var(--gold); margin-bottom: 0.4rem; }
+  .finding p { margin: 0; font-size: 0.98rem; color: var(--ink-mid); }
+  .finding p strong { color: var(--ink); }
+  .callout { background: #fff8e8; border: 1px solid #e8d48a; border-left: 3px solid var(--gold); padding: 1.2rem 1.5rem; margin: 1.5rem 0; }
+  .callout p { margin: 0; font-size: 0.98rem; color: var(--ink-mid); }
+  .equation { background: var(--bg-alt); border: 1px solid var(--rule); padding: 1.5rem 2rem; text-align: center; font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--forest); margin: 1.5rem 0; font-style: italic; letter-spacing: 0.03em; }
+  .chain-steps { margin: 2rem 0; }
+  .chain-step { display: flex; gap: 1.5rem; margin-bottom: 1rem; align-items: flex-start; }
+  .chain-step-num { font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.2em; color: white; background: var(--forest); padding: 0.4rem 0.8rem; flex-shrink: 0; margin-top: 0.2rem; }
+  .chain-step-content { flex: 1; background: var(--bg-alt); border: 1px solid var(--rule); padding: 1rem 1.2rem; }
+  .chain-step-content strong { color: var(--ink); font-weight: 600; display: block; margin-bottom: 0.3rem; }
+  .chain-step-content p { margin: 0; font-size: 0.95rem; color: var(--ink-mid); }
+  .keywords { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+  .keyword { font-family: 'Cinzel', serif; font-size: 0.52rem; letter-spacing: 0.15em; color: var(--ink-mid); border: 1px solid var(--rule); padding: 0.3rem 0.8rem; }
+  .paper-nav { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--rule); padding-top: 2.5rem; margin-top: 4rem; }
+  .paper-nav a { font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.15em; color: var(--ink-light); text-decoration: none; transition: color 0.2s; }
+  .paper-nav a:hover { color: var(--gold); }
+  .paper-nav .next { text-align: right; }
+  .paper-nav .label { display: block; font-size: 0.5rem; letter-spacing: 0.2em; color: var(--gold); opacity: 0.7; margin-bottom: 0.3rem; }
+  footer { background: var(--forest); padding: 2rem 3rem; text-align: center; border-top: 2px solid var(--gold); }
+  footer p { font-family: 'Cinzel', serif; font-size: 0.55rem; letter-spacing: 0.2em; color: rgba(245,240,232,0.3); }
+  @media (max-width: 700px) {
+    .top-nav { padding: 0.9rem 1.5rem; }
+    .paper-hero-inner, .content-wrap { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .stat-grid { grid-template-columns: 1fr; }
+    .paper-nav { flex-direction: column; gap: 1.5rem; }
+    .chain-step { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <a href="index.html" class="top-nav-logo">Natural Organization Institute</a>
+  <div class="top-nav-links">
+    <a href="index.html#papers">All Papers</a>
+    <a href="index.html#contact">Contact</a>
+    <a href="papers/paper-07-generalized-existence-theorem.pdf" download class="download-btn">Download PDF</a>
+  </div>
+</nav>
+
+<div class="paper-hero">
+  <div class="paper-hero-inner">
+    <p class="paper-series">Paper 07 of 09</p>
+    <h1 class="paper-title">The Generalized Existence Theorem: A Unified Formal Framework for the M/I/C Trinitarian Minimum</h1>
+    <div class="paper-meta">
+      <div class="paper-meta-item"><span class="label">Author</span><span class="value">P.B. Van Slyke</span></div>
+      <div class="paper-meta-item"><span class="label">Institution</span><span class="value">Natural Organization Institute, Lyons, Colorado</span></div>
+      <div class="paper-meta-item"><span class="label">Series Position</span><span class="value">Paper 7 in the Constitutive Intelligence Series</span></div>
+      <div class="paper-meta-item"><span class="label">Status</span><span class="value">Natural Organization Institute — 2026</span></div>
+    </div>
+    <div class="paper-actions">
+      <a href="papers/paper-07-generalized-existence-theorem.pdf" download class="btn-download">
+        <svg viewBox="0 0 24 24" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download PDF
+      </a>
+      <a href="index.html" class="btn-back">← Back to Institute</a>
+    </div>
+  </div>
+</div>
+
+<div class="content-wrap">
+
+  <div class="toc">
+    <p class="toc-title">Contents</p>
+    <ol>
+      <li><a href="#abstract">Abstract</a></li>
+      <li><a href="#introduction">Introduction</a></li>
+      <li><a href="#gee">The Generalized Existence Equation</a></li>
+      <li><a href="#mic">The M/I/C Trinitarian Minimum</a></li>
+      <li><a href="#biology">The M/I/C Triad in Biology</a></li>
+      <li><a href="#chain">The Four-Step Determination Chain</a></li>
+      <li><a href="#darwin">Darwin's Own Falsification Condition</a></li>
+      <li><a href="#temporal">Temporal Closure</a></li>
+      <li><a href="#conclusion">Conclusion</a></li>
+    </ol>
+  </div>
+
+  <div class="paper-section" id="abstract">
+    <h2>Abstract</h2>
+    <div class="abstract-box">
+      <p>We present a unified formal framework establishing the minimum functional requirements for persistent systems (Xf &gt; 0) operating within an entropic universe. The Generalized Existence Equation (GEE) formalizes the organizational architecture required for any system to maintain functional identity across time against the background pressure of increasing entropy.</p>
+      <p>Three components are demonstrated to be inseparable foundational minima — the M/I/C triad: Meaning/Valence (Mmin), Intelligence/Correction (Imin), and Loop Closure (Cmin). These are not metaphysical postulates but engineering necessities derivable from control theory: any closed-loop system maintaining functional identity against perturbation requires a reference signal, a comparator, and feedback integration. The removal of any single component leads to immediate systemic dissipation.</p>
+      <p>The empirical anchor is provided by the Anchor-Single pair analysis (61,320,087 pair observations across 1,527,212 functional protein domains), which demonstrates non-random organizational constraint at the operational floor of biological matter. A four-step Determination Chain connects this floor-level measurement to constitutive intelligence at the source. Darwin's own falsification condition is satisfied on Darwin's terms.</p>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-card"><span class="val">3</span><span class="lbl">Inseparable M/I/C Components</span></div>
+      <div class="stat-card"><span class="val">4</span><span class="lbl">Steps in the Determination Chain</span></div>
+      <div class="stat-card"><span class="val">Z = −87.13</span><span class="lbl">Non-Randomness at the Operational Floor</span></div>
+    </div>
+  </div>
+
+  <div class="paper-section" id="introduction">
+    <h2>1. Introduction</h2>
+    <p>The question of how organized systems persist in an entropic universe is foundational to biology, physics, and philosophy. Current frameworks address this question at the level of mechanism — describing how specific molecules, cells, or organisms maintain themselves — but do not address the formal minimum requirements for persistence itself.</p>
+    <p>This paper addresses that gap. By deriving the minimum functional requirements for any persistent system from first principles in control theory and cybernetics, we establish a formal framework — the Generalized Existence Theorem — that applies across scales from molecular machines to organisms to civilizations.</p>
+    <div class="callout">
+      <p><strong>The Central Claim:</strong> Persistence against entropy requires, at minimum, three inseparable functional components: a reference signal (Meaning), a comparator/actuator (Intelligence), and feedback integration (Loop Closure). These are not biological specialties. They are logical necessities for any system that maintains functional identity across time.</p>
+    </div>
+  </div>
+
+  <div class="paper-section" id="gee">
+    <h2>2. The Generalized Existence Equation</h2>
+    <p>The GEE serves as an organizing index for the framework, formalizing the functional requirements for persistent systems:</p>
+    <div class="equation">Xf(t) = ∫[t₀→tₙ] ( Φ · ΔIsys / Ωsys ) − εsys dt</div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Term</th><th>Definition</th><th>Functional Role</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Xf(t)</strong></td><td>Functional existence state at time t</td><td>The quantity to be maintained above zero</td></tr>
+          <tr><td><strong>Φ</strong></td><td>Coordination Protocol (Φ &gt; 0)</td><td>The ratio of functional to total informational flux — must be positive for persistence</td></tr>
+          <tr><td><strong>ΔIsys</strong></td><td>Net informational input to the system</td><td>The organizational work performed per unit time</td></tr>
+          <tr><td><strong>Ωsys</strong></td><td>System complexity/entropy load</td><td>The organizational burden the system must overcome</td></tr>
+          <tr><td><strong>εsys</strong></td><td>Entropic dissipation rate</td><td>The background pressure toward disorder</td></tr>
+        </tbody>
+      </table>
+      <p class="table-caption">Table 1. Terms of the Generalized Existence Equation. For Xf(t) to remain positive, Φ must be maintained above a minimum threshold Φmin continuously.</p>
+    </div>
+
+    <p>The critical parameter is Φ — the Coordination Protocol. When Φ → 0, the system is dominated by −εsys and Xf(t) → 0. Persistence requires that a minimum Φ be maintained continuously. This minimum is supplied by the M/I/C triad.</p>
+  </div>
+
+  <div class="paper-section" id="mic">
+    <h2>3. The M/I/C Trinitarian Minimum</h2>
+    <p>Any closed-loop control system maintaining functional identity against perturbation requires exactly three things. These are derivable from control theory independently of biology or philosophy:</p>
+
+    <div class="finding">
+      <p class="finding-num">Mmin — Meaning / Valence</p>
+      <p><strong>The reference signal.</strong> A persistent representation of the target state — what the system is maintaining itself as. Without a reference signal, there is no criterion for correction. A thermostat without a set-point temperature cannot maintain temperature. A cell without a genomic specification cannot replicate itself faithfully. The reference signal is the memory of the target configuration.</p>
+    </div>
+
+    <div class="finding">
+      <p class="finding-num">Imin — Intelligence / Correction</p>
+      <p><strong>The comparator and actuator.</strong> The capacity to compare the current state against the reference signal and apply corrective force when deviation is detected. This is discernment in its most stripped-down functional sense: treating this state differently from that state according to a maintained criterion. Without a comparator, perturbations accumulate uncorrected.</p>
+    </div>
+
+    <div class="finding">
+      <p class="finding-num">Cmin — Loop Closure</p>
+      <p><strong>Feedback integration.</strong> The return of output information to the input, enabling the system to monitor the effect of its own corrections and adjust accordingly. Without loop closure, the system operates open-loop and cannot verify whether corrections are effective. Loop closure is what makes the system self-referential in the cybernetic sense.</p>
+    </div>
+
+    <div class="callout">
+      <p><strong>The Removal Test:</strong> Remove any single component and trace the consequence. Remove Mmin (the reference signal) — the comparator has nothing to compare against; corrections become arbitrary; the system drifts. Remove Imin (the comparator) — deviations from the reference accumulate without response; entropy wins. Remove Cmin (loop closure) — corrections are applied without feedback; the system cannot verify their effect; eventual divergence. All three are necessary. None is sufficient alone. The triad is inseparable.</p>
+    </div>
+  </div>
+
+  <div class="paper-section" id="biology">
+    <h2>4. The M/I/C Triad in Biology</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Component</th><th>Biological Instantiation</th><th>Functional Role</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Mmin (Meaning)</strong></td><td>DNA as the stored target state; the sequence that defines what a functional protein is</td><td>Reference signal — the specification of what is being maintained</td></tr>
+          <tr><td><strong>Imin (Intelligence)</strong></td><td>Proofreading enzymes (DNA polymerase ε, MutL/MutS); negative feedback loops in gene regulation</td><td>Comparator/actuator — detects and corrects deviations from the reference</td></tr>
+          <tr><td><strong>Cmin (Loop Closure)</strong></td><td>The ribosome as translation protocol; connecting digital code (DNA) to analog work (proteins)</td><td>Feedback integration — ensures the output of the system is monitored and fed back</td></tr>
+        </tbody>
+      </table>
+      <p class="table-caption">Table 2. The M/I/C triad instantiated in molecular biology. These are the minimum functional requirements for cellular persistence — not design arguments, but engineering necessities confirmed by the fact that removing any component is lethal.</p>
+    </div>
+
+    <p>DNA replication fidelity in E. coli: approximately one error per 10⁹ to 10¹⁰ base pairs replicated. This is not a chemical accident. It is the product of the M/I/C triad operating at the molecular level — a reference signal (template strand), a comparator (proofreading exonuclease), and loop closure (mismatch repair). Remove any component and error rates increase by orders of magnitude.</p>
+  </div>
+
+  <div class="paper-section" id="chain">
+    <h2>5. The Four-Step Determination Chain</h2>
+    <p>The Anchor-Single pair data provides the empirical floor for a four-step argument connecting measurement to source:</p>
+
+    <div class="chain-steps">
+      <div class="chain-step">
+        <div class="chain-step-num">Step 1</div>
+        <div class="chain-step-content">
+          <strong>Non-Randomness at the Operational Floor</strong>
+          <p>The Anchor-Single analysis demonstrates categorical non-randomness at the 5-residue window level: A→N Z = −87.13 in functional sequences vs. Z = +2.33 in disordered sequences. This is not a marginal effect. It is a categorical reversal of 89.46 Z-score points across 61,320,087 observations. Non-randomness at this scale, surviving 16 biophysical controls and replicating in 3D space, is not a measurement artifact.</p>
+        </div>
+      </div>
+
+      <div class="chain-step">
+        <div class="chain-step-num">Step 2</div>
+        <div class="chain-step-content">
+          <strong>Non-Random Equals Determined</strong>
+          <p>This follows from the definition of terms. The opposite of random is determined. If the A→N avoidance is not random — and 61 million observations across independent databases and measurement methods confirm it is not — then it is determined. Determined by something. This step requires no additional inference: it is a definitional consequence of Step 1.</p>
+        </div>
+      </div>
+
+      <div class="chain-step">
+        <div class="chain-step-num">Step 3</div>
+        <div class="chain-step-content">
+          <strong>Determined Equals Intelligent by Functional Derivation</strong>
+          <p>Determination requires a comparator — a mechanism that treats this state differently from that state according to a maintained criterion. A comparator requires discernment. Discernment cannot be blind — a blind comparator is a contradiction in terms; it is simply noise. The functional description of what non-blind discernment requires is identical to the functional description of intelligence at its most stripped-down level: the capacity to distinguish, evaluate, and respond according to a criterion.</p>
+        </div>
+      </div>
+
+      <div class="chain-step">
+        <div class="chain-step-num">Step 4</div>
+        <div class="chain-step-content">
+          <strong>Physics Confirms the Terminus</strong>
+          <p>No derived system produces output whose information content exceeds its source. This is simultaneously a thermodynamic necessity (First Law), a logical necessity (a system cannot output what it does not contain), and a mathematical necessity (Shannon entropy cannot increase without external input). Intelligence at the operational floor — confirmed empirically at Step 1 — requires intelligence at the source. The conservation principle closes the argument.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="paper-section" id="darwin">
+    <h2>6. Darwin's Own Falsification Condition — Satisfied</h2>
+    <p>In <em>On the Origin of Species</em>, Darwin specified his own falsification condition:</p>
+    <div class="abstract-box">
+      <p><em>"If it could be demonstrated that any complex organ existed which could not possibly have been formed by numerous, successive, slight modifications, my theory would absolutely break down."</em></p>
+    </div>
+    <p>The Anchor-Single pair analysis satisfies this condition on Darwin's own terms. The gap between functional and disordered pair preference matrices is not a gradient of successive slight modifications from disordered to organized. It is a categorical organizational difference — A→N: Z = −87 functional, Z = +2.33 disordered — that appears at the 5-residue window level across billions of amino acid pairs.</p>
+    <p>More precisely: the M/I/C triad cannot be assembled incrementally. Each component is functionless without the others. A reference signal without a comparator does nothing. A comparator without a reference signal compares nothing. A feedback loop without both produces nothing useful. The triad is all-or-nothing. It cannot be approached through "numerous, successive, slight modifications" from a state in which none of the components exist.</p>
+    <p><strong>Intelligence as the capacity to set and maintain organizational boundaries is not produced incrementally from systems that do not possess it.</strong> Zero boundary-setting capacity, multiplied by any number of steps, yields zero boundary-setting. The GEE formalizes this: when Φ = 0, Xf(t) → 0 regardless of time elapsed.</p>
+  </div>
+
+  <div class="paper-section" id="temporal">
+    <h2>7. Temporal Closure — Why Time Does Not Help</h2>
+    <p>A common response to the M/I/C argument is that sufficient time resolves the assembly problem. The Temporal Closure argument demonstrates why this is incorrect for the specific case of the M/I/C triad.</p>
+    <p>Time helps when sub-threshold progress can accumulate. A mountain climber resting at base camp has made progress that persists. When they resume, they build on it. Time genuinely helps because progress is conserved between attempts.</p>
+    <p>Time does not help when each attempt resets to zero. If Φ must exceed Φmin continuously for the system to persist — and below Φmin the system dissipates — then each sub-threshold attempt produces a system that dissipates before the next component can be added. There is no base camp. There is no accumulated progress. Geological time multiplies independent blind searches, each beginning from zero. It does not accumulate directed progress below the persistence threshold.</p>
+    <div class="callout">
+      <p><strong>The key asymmetry:</strong> Selection has nothing to act upon until Φ &gt; Φmin is already operative. Selection requires heritable variation in fitness. Fitness requires persistence. Persistence requires Φ &gt; Φmin. The M/I/C triad must be present before selection can preserve anything — which means selection cannot have assembled it. It was already there.</p>
+    </div>
+  </div>
+
+  <div class="paper-section" id="conclusion">
+    <h2>8. Conclusion</h2>
+    <p>The Generalized Existence Theorem establishes three results with formal precision. First, persistence against entropy requires a minimum Coordination Protocol Φ &gt; Φmin maintained continuously. Second, this minimum is supplied by three inseparable functional components — Meaning/Valence, Intelligence/Correction, and Loop Closure — none of which is functional without the others. Third, the empirical confirmation of non-random organizational constraint at the 5-residue window level (61,320,087 observations, A→N Z = −87.13) provides the floor-level measurement that anchors the four-step Determination Chain to the requirement for constitutive intelligence at the source.</p>
+    <p>The framework is grounded in control theory, confirmed empirically, and closed formally by the conservation principle. Time does not resolve the assembly problem because sub-threshold systems dissipate before the next component can be added. Selection cannot assemble what must already be present before selection can operate.</p>
+
+    <div class="keywords">
+      <span class="keyword">Generalized Existence Theorem</span>
+      <span class="keyword">M/I/C Triad</span>
+      <span class="keyword">Coordination Protocol</span>
+      <span class="keyword">Determination Chain</span>
+      <span class="keyword">Cybernetics</span>
+      <span class="keyword">Control Theory</span>
+      <span class="keyword">Darwin's Falsification</span>
+      <span class="keyword">Temporal Closure</span>
+    </div>
+  </div>
+
+  <div class="paper-nav">
+    <div class="prev">
+      <a href="paper-06-constitutive-intelligence.html"><span class="label">← Previous Paper</span>Constitutive Intelligence</a>
+    </div>
+    <div class="next">
+      <a href="paper-08-branching-sensitivity.html"><span class="label">Next Paper →</span>Branching Sensitivity</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>Natural Organization Institute &nbsp;|&nbsp; Lyons, Colorado &nbsp;|&nbsp; van.slyke@naturalorganization.org &nbsp;|&nbsp; naturalorganization.org</p>
+</footer>
+</body>
+</html>
