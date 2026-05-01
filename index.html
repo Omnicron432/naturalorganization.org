@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Natural Organization Institute</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --forest: #1a2e1a; --forest-mid: #2d4a2d; --forest-light: #3d6b3d;
+    --gold: #b8973a; --gold-light: #d4b45a; --gold-pale: #e8d48a;
+    --cream: #f5f0e8; --cream-dark: #ede4d0;
+    --text-dark: #1a1f1a; --text-mid: #3a4a3a; --text-light: #6a7a6a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'EB Garamond', Georgia, serif; background: var(--cream); color: var(--text-dark); overflow-x: hidden; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(245,240,232,0.94); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(184,151,58,0.2);
+  }
+  .nav-logo { display: flex; align-items: center; gap: 0.9rem; }
+  .nav-logo svg { width: 42px; height: 42px; }
+  .nav-logo-text { font-family: 'Cinzel', serif; font-size: 0.78rem; letter-spacing: 0.15em; color: var(--forest); line-height: 1.35; }
+  .nav-logo-text span { display: block; font-size: 0.62rem; letter-spacing: 0.25em; color: var(--gold); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.16em; color: var(--text-mid); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta { font-family: 'Cinzel', serif; font-size: 0.62rem; letter-spacing: 0.18em; color: var(--cream); background: var(--forest); border: 1px solid var(--gold); padding: 0.6rem 1.4rem; text-decoration: none; transition: all 0.25s; }
+  .nav-cta:hover { background: var(--gold); color: var(--forest); }
+
+  .hero { min-height: 100vh; display: flex; align-items: center; position: relative; overflow: hidden; background: var(--forest); }
+  .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 70% 50%, rgba(184,151,58,0.08) 0%, transparent 60%), radial-gradient(ellipse 50% 80% at 20% 80%, rgba(61,107,61,0.3) 0%, transparent 50%), linear-gradient(160deg, #0f1f0f 0%, #1a2e1a 40%, #243824 100%); }
+  .orbital-bg { position: absolute; right: -5%; top: 50%; transform: translateY(-50%); width: 55vw; height: 55vw; opacity: 0.12; }
+  .orbital-bg circle, .orbital-bg ellipse { stroke: var(--gold-light); fill: none; }
+  .ring-1 { animation: rotate 40s linear infinite; transform-origin: center; }
+  .ring-2 { animation: rotate 60s linear infinite reverse; transform-origin: center; }
+  .ring-3 { animation: rotate 80s linear infinite; transform-origin: center; }
+  @keyframes rotate { to { transform: rotate(360deg); } }
+  .hero-content { position: relative; z-index: 2; max-width: 700px; padding: 10rem 4rem 6rem 8rem; }
+  .hero-eyebrow { font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.35em; color: var(--gold); margin-bottom: 1.8rem; opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards; }
+  .hero-eyebrow::before, .hero-eyebrow::after { content: '—'; margin: 0 0.8em; opacity: 0.5; }
+  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.8rem, 5.5vw, 5rem); font-weight: 300; line-height: 1.1; color: var(--cream); margin-bottom: 2rem; opacity: 0; animation: fadeUp 0.9s ease 0.4s forwards; }
+  .hero-title em { font-style: italic; color: var(--gold-light); }
+  .hero-subtitle { font-size: 1.15rem; line-height: 1.75; color: rgba(245,240,232,0.7); margin-bottom: 3rem; max-width: 520px; opacity: 0; animation: fadeUp 0.9s ease 0.6s forwards; }
+  .hero-actions { display: flex; gap: 1.2rem; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.9s ease 0.8s forwards; }
+  .btn-primary { font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.2em; color: var(--forest); background: var(--gold); padding: 1rem 2.2rem; text-decoration: none; transition: all 0.25s; border: 1px solid var(--gold); }
+  .btn-primary:hover { background: var(--gold-light); }
+  .btn-secondary { font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.2em; color: var(--cream); background: transparent; padding: 1rem 2.2rem; text-decoration: none; border: 1px solid rgba(245,240,232,0.3); transition: all 0.25s; }
+  .btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+
+  .gold-divider { display: flex; align-items: center; justify-content: center; gap: 1.2rem; padding: 0.5rem 0; }
+  .gold-divider::before, .gold-divider::after { content: ''; flex: 1; max-width: 120px; height: 1px; background: var(--gold); opacity: 0.4; }
+  .gold-divider span { font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.35em; color: var(--gold); opacity: 0.7; }
+
+  section { padding: 7rem 4rem; }
+  .section-label { font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.35em; color: var(--gold); text-align: center; margin-bottom: 1rem; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 4vw, 3.5rem); font-weight: 300; color: var(--forest); text-align: center; line-height: 1.15; margin-bottom: 1.5rem; }
+  .section-title em { font-style: italic; color: var(--gold); }
+  .section-title.light { color: var(--cream); }
+  .section-body { font-size: 1.12rem; line-height: 1.85; color: var(--text-mid); text-align: center; max-width: 700px; margin: 0 auto 3rem; }
+  .section-body.light { color: rgba(245,240,232,0.65); }
+
+  /* INTRO */
+  .intro { background: var(--cream); }
+  .intro-quote { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.5rem, 2.5vw, 2.2rem); font-style: italic; font-weight: 300; color: var(--forest); text-align: center; max-width: 800px; margin: 0 auto 1rem; line-height: 1.45; }
+  .intro-quote-attr { font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.25em; color: var(--gold); text-align: center; opacity: 0.7; margin-bottom: 4rem; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; max-width: 1100px; margin: 0 auto; }
+  .two-col p { font-size: 1.05rem; line-height: 1.9; color: var(--text-mid); margin-bottom: 1.1rem; }
+  .two-col p strong { color: var(--forest); font-weight: 500; }
+  .two-col p em { font-style: italic; color: var(--forest-light); }
+
+  /* PAPERS */
+  .papers { background: var(--forest); }
+  .paper-tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; margin-bottom: 4rem; }
+  .tab-btn { font-family: 'Cinzel', serif; font-size: 0.57rem; letter-spacing: 0.16em; color: rgba(245,240,232,0.5); background: transparent; border: 1px solid rgba(184,151,58,0.2); padding: 0.65rem 1.3rem; cursor: pointer; transition: all 0.25s; }
+  .tab-btn:hover, .tab-btn.active { color: var(--forest); background: var(--gold); border-color: var(--gold); }
+  .paper-panel { display: none; max-width: 1100px; margin: 0 auto; }
+  .paper-panel.active { display: block; }
+  .paper-header { border-left: 2px solid var(--gold); padding-left: 2rem; margin-bottom: 3rem; }
+  .paper-header .num { font-family: 'Cinzel', serif; font-size: 0.55rem; letter-spacing: 0.3em; color: var(--gold); opacity: 0.6; margin-bottom: 0.5rem; }
+  .paper-header h3 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.5rem, 2.8vw, 2.4rem); font-weight: 300; color: var(--cream); line-height: 1.25; margin-bottom: 0.8rem; }
+  .paper-header .journal { font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.2em; color: var(--gold); opacity: 0.7; }
+  .paper-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+  .paper-block h4 { font-family: 'Cinzel', serif; font-size: 0.62rem; letter-spacing: 0.2em; color: var(--gold); margin-bottom: 1rem; }
+  .paper-block p { font-size: 1rem; line-height: 1.85; color: rgba(245,240,232,0.65); margin-bottom: 0.9rem; }
+  .paper-block p strong { color: var(--cream); font-weight: 400; }
+  .paper-block p em { font-style: italic; color: var(--gold-light); }
+  .stat-row { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1.5rem; }
+  .stat-box { border: 1px solid rgba(184,151,58,0.25); padding: 1rem 1.5rem; text-align: center; flex: 1; min-width: 110px; }
+  .stat-box .val { font-family: 'Cormorant Garamond', serif; font-size: 1.9rem; color: var(--gold-light); display: block; line-height: 1.1; }
+  .stat-box .lbl { font-family: 'Cinzel', serif; font-size: 0.5rem; letter-spacing: 0.16em; color: rgba(245,240,232,0.4); }
+  .finding-list { list-style: none; }
+  .finding-list li { padding: 0.85rem 0 0.85rem 1.4rem; border-bottom: 1px solid rgba(184,151,58,0.1); font-size: 0.98rem; line-height: 1.75; color: rgba(245,240,232,0.65); position: relative; }
+  .finding-list li::before { content: '→'; position: absolute; left: 0; color: var(--gold); opacity: 0.6; }
+  .data-table { width: 100%; border-collapse: collapse; margin: 1.2rem 0; }
+  .data-table th { font-family: 'Cinzel', serif; font-size: 0.52rem; letter-spacing: 0.14em; color: var(--gold); text-align: left; padding: 0.6rem 0.8rem; border-bottom: 1px solid rgba(184,151,58,0.3); }
+  .data-table td { font-size: 0.9rem; color: rgba(245,240,232,0.6); padding: 0.55rem 0.8rem; border-bottom: 1px solid rgba(184,151,58,0.08); }
+  .data-table td strong { color: var(--cream); }
+  .paper-full-width { margin-bottom: 2.5rem; }
+  .paper-full-width h4 { font-family: 'Cinzel', serif; font-size: 0.62rem; letter-spacing: 0.2em; color: var(--gold); margin-bottom: 1rem; }
+  .paper-full-width p { font-size: 1rem; line-height: 1.85; color: rgba(245,240,232,0.65); margin-bottom: 0.9rem; }
+  .paper-full-width p strong { color: var(--cream); font-weight: 400; }
+
+  /* SERIES */
+  .series { background: var(--cream); }
+  .series-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; max-width: 1100px; margin: 4rem auto 0; }
+  .series-card { background: var(--cream-dark); border: 1px solid rgba(184,151,58,0.15); padding: 2rem; transition: all 0.3s; position: relative; }
+  .series-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); opacity: 0; transition: opacity 0.3s; }
+  .series-card:hover { background: white; }
+  .series-card:hover::before { opacity: 1; }
+  .series-card .num { font-family: 'Cinzel', serif; font-size: 0.55rem; letter-spacing: 0.3em; color: var(--gold); opacity: 0.6; margin-bottom: 0.8rem; }
+  .series-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; color: var(--forest); margin-bottom: 0.8rem; line-height: 1.3; }
+  .series-card p { font-size: 0.9rem; line-height: 1.75; color: var(--text-light); }
+  .series-card .tag { font-family: 'Cinzel', serif; font-size: 0.5rem; letter-spacing: 0.2em; color: var(--gold); opacity: 0.7; margin-top: 1rem; display: inline-block; border: 1px solid rgba(184,151,58,0.3); padding: 0.25rem 0.7rem; }
+
+  /* FRAMEWORK */
+  .framework { background: var(--cream-dark); }
+  .framework-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; max-width: 1100px; margin: 4rem auto 0; }
+  .f-card { text-align: center; padding: 2rem 1.2rem; }
+  .f-icon { width: 56px; height: 56px; margin: 0 auto 1.4rem; border: 1px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+  .f-icon svg { width: 24px; height: 24px; stroke: var(--gold); fill: none; }
+  .f-card h4 { font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 0.2em; color: var(--forest); margin-bottom: 0.8rem; }
+  .f-card p { font-size: 0.96rem; line-height: 1.75; color: var(--text-light); }
+
+  /* FINDINGS BANNER */
+  .findings-banner { background: var(--forest); border-top: 1px solid rgba(184,151,58,0.3); border-bottom: 1px solid rgba(184,151,58,0.3); padding: 5rem 4rem; text-align: center; }
+  .findings-banner blockquote { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.5rem, 2.8vw, 2.4rem); font-style: italic; font-weight: 300; color: var(--cream); max-width: 840px; margin: 2rem auto 1.5rem; line-height: 1.4; }
+  .findings-banner cite { font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.25em; color: var(--gold); font-style: normal; opacity: 0.7; }
+  .metrics-row { display: flex; justify-content: center; flex-wrap: wrap; margin-top: 3.5rem; border: 1px solid rgba(184,151,58,0.25); max-width: 960px; margin-left: auto; margin-right: auto; }
+  .metric { flex: 1; min-width: 130px; padding: 2rem 1.5rem; text-align: center; border-right: 1px solid rgba(184,151,58,0.2); }
+  .metric:last-child { border-right: none; }
+  .metric .val { font-family: 'Cormorant Garamond', serif; font-size: 2.1rem; color: var(--gold-light); display: block; }
+  .metric .lbl { font-family: 'Cinzel', serif; font-size: 0.5rem; letter-spacing: 0.16em; color: rgba(245,240,232,0.4); display: block; margin-top: 0.3rem; }
+
+  /* FOUNDER */
+  .founder { background: var(--cream-dark); padding: 7rem 4rem; }
+  .founder-inner { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: auto 1fr; gap: 4rem; align-items: start; }
+  .founder-portrait { width: 180px; height: 220px; background: var(--forest-mid); border: 1px solid rgba(184,151,58,0.3); display: flex; align-items: center; justify-content: center; flex-shrink: 0; position: relative; overflow: hidden; }
+  .founder-portrait::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(184,151,58,0.1), transparent); }
+  .founder-portrait-initials { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 300; color: rgba(245,240,232,0.4); font-style: italic; }
+  .founder-text .role { font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.3em; color: var(--gold); margin-bottom: 0.6rem; }
+  .founder-text h3 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 400; color: var(--forest); margin-bottom: 1.5rem; }
+  .founder-text p { font-size: 1.05rem; line-height: 1.9; color: var(--text-mid); margin-bottom: 1rem; }
+
+  /* CONTACT */
+  .contact { background: var(--forest); text-align: center; padding: 7rem 4rem; }
+  .contact-form { max-width: 540px; margin: 3rem auto 0; display: flex; flex-direction: column; gap: 1rem; }
+  .contact-form input, .contact-form textarea { background: rgba(255,255,255,0.05); border: 1px solid rgba(184,151,58,0.25); color: var(--cream); font-family: 'EB Garamond', serif; font-size: 1rem; padding: 0.9rem 1.2rem; outline: none; transition: border-color 0.2s; width: 100%; }
+  .contact-form input::placeholder, .contact-form textarea::placeholder { color: rgba(245,240,232,0.3); }
+  .contact-form input:focus, .contact-form textarea:focus { border-color: var(--gold); }
+  .contact-form textarea { height: 140px; resize: vertical; }
+  .contact-form button { font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.2em; color: var(--forest); background: var(--gold); border: none; padding: 1rem; cursor: pointer; transition: background 0.2s; }
+  .contact-form button:hover { background: var(--gold-light); }
+
+  footer { background: #0f1a0f; padding: 3rem 4rem; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(184,151,58,0.15); }
+  .footer-logo { font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.2em; color: rgba(245,240,232,0.35); }
+  .footer-tagline { font-family: 'EB Garamond', serif; font-size: 0.9rem; font-style: italic; color: rgba(245,240,232,0.25); }
+  .footer-copy { font-family: 'Cinzel', serif; font-size: 0.55rem; letter-spacing: 0.15em; color: rgba(245,240,232,0.2); }
+
+  .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 2rem; }
+    .nav-links { display: none; }
+    .hero-content { padding: 8rem 2rem 5rem; }
+    section { padding: 5rem 2rem; }
+    .two-col, .paper-grid, .founder-inner { grid-template-columns: 1fr; }
+    .series-list { grid-template-columns: 1fr; }
+    .framework-grid { grid-template-columns: 1fr 1fr; }
+    .metrics-row { flex-direction: column; }
+    .metric { border-right: none; border-bottom: 1px solid rgba(184,151,58,0.2); }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="40" cy="40" r="36" stroke="#b8973a" stroke-width="0.8" fill="none"/>
+      <circle cx="40" cy="40" r="6" fill="#b8973a"/>
+      <ellipse cx="40" cy="40" rx="28" ry="10" stroke="#b8973a" stroke-width="0.7" fill="none" transform="rotate(-30 40 40)"/>
+      <ellipse cx="40" cy="40" rx="22" ry="8" stroke="#b8973a" stroke-width="0.5" fill="none" transform="rotate(40 40 40)"/>
+      <ellipse cx="40" cy="40" rx="32" ry="12" stroke="#b8973a" stroke-width="0.5" fill="none" transform="rotate(70 40 40)"/>
+      <circle cx="62" cy="34" r="2.5" fill="#b8973a"/>
+      <circle cx="18" cy="47" r="2" fill="#b8973a"/>
+      <circle cx="52" cy="56" r="1.8" fill="#b8973a"/>
+      <line x1="40" y1="4" x2="40" y2="76" stroke="#b8973a" stroke-width="0.4" opacity="0.4"/>
+      <line x1="4" y1="40" x2="76" y2="40" stroke="#b8973a" stroke-width="0.4" opacity="0.4"/>
+    </svg>
+    <div class="nav-logo-text">NATURAL ORGANIZATION<br><span>— INSTITUTE —</span></div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#intro">About</a></li>
+    <li><a href="#papers">Research</a></li>
+    <li><a href="#series">Series</a></li>
+    <li><a href="#findings">Key Findings</a></li>
+    <li><a href="#founder">Founder</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Collaborate</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <svg class="orbital-bg" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+    <g class="ring-1"><ellipse cx="250" cy="250" rx="200" ry="70" stroke-width="0.8"/></g>
+    <g class="ring-2"><ellipse cx="250" cy="250" rx="180" ry="90" stroke-width="0.6"/></g>
+    <g class="ring-3"><ellipse cx="250" cy="250" rx="220" ry="55" stroke-width="0.5"/></g>
+    <circle cx="250" cy="250" r="18" fill="#b8973a" opacity="0.6"/>
+    <circle cx="250" cy="250" r="240" stroke-width="0.4"/>
+    <line x1="250" y1="10" x2="250" y2="490" stroke="#b8973a" stroke-width="0.4"/>
+    <line x1="10" y1="250" x2="490" y2="250" stroke="#b8973a" stroke-width="0.4"/>
+    <circle cx="430" cy="205" r="6" fill="#b8973a" opacity="0.5"/>
+    <circle cx="85" cy="290" r="4" fill="#b8973a" opacity="0.4"/>
+  </svg>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Natural Organization Institute</p>
+    <h1 class="hero-title">Structure is not revealed<br>by what is present.<br><em>It is revealed by<br>what is absent.</em></h1>
+    <p class="hero-subtitle">A research program at the intersection of structural biology, information theory, and the foundational question of where organizational intelligence originates.</p>
+    <div class="hero-actions">
+      <a href="#papers" class="btn-primary">Explore the Research</a>
+      <a href="#findings" class="btn-secondary">Key Findings</a>
+    </div>
+  </div>
+</section>
+
+<!-- INTRO -->
+<section class="intro" id="intro">
+  <p class="section-label reveal">The Research Program</p>
+  <p class="intro-quote reveal">"Randomness is a language spoken by the universe that we have yet to translate."</p>
+  <p class="intro-quote-attr reveal">— P.B. Van Slyke, Natural Organization Institute</p>
+  <div class="two-col reveal">
+    <div>
+      <p>The Natural Organization Institute was founded to pursue a single rigorous question: do biological systems exhibit <strong>organizational signatures</strong> that exceed what stochastic processes alone can produce? The answer, emerging from years of large-scale empirical analysis, is yes — measurably, categorically, and with a consistency that demands explanation.</p>
+      <p>Our central analytical instrument is the <strong>Anchor-Single pair method</strong> — a novel framework for detecting non-random organizational patterns in sequential biological data. Applied across over 61 million amino acid pair observations from 1.5 million functional protein domains, it reveals that protein sequence organization is not random. It is structured, conserved, and <em>physically instantiated</em> in three-dimensional space.</p>
+    </div>
+    <div>
+      <p>The research program spans nine published papers — from empirical protein analysis to formal logical axiomatization — unified by a single core measurement: the geometry of what is excluded tells you more about organizational architecture than what is included.</p>
+      <p>This is not a claim about mechanism. It is a measurement of pattern — one that holds across independent datasets, 16 biophysical controls, four levels of phylogenetic correction, nonlinear machine learning models, and <strong>direct three-dimensional spatial measurement</strong> with no reference to sequence order whatsoever.</p>
+      <p>Current research is being submitted for peer review to <em>Entropy</em> (MDPI) and <em>Biology and Physiology</em>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH PAPERS -->
+<section class="papers" id="papers">
+  <p class="section-label reveal">Research Papers</p>
+  <h2 class="section-title light reveal">The Complete Research Series</h2>
+  <p class="section-body light reveal">Nine interconnected studies building from empirical measurement to formal theory. Select any paper to explore its findings.</p>
+
+  <div class="paper-tabs">
+    <button class="tab-btn active" onclick="showPaper(0)">Anchor-Single</button>
+    <button class="tab-btn" onclick="showPaper(1)">Irreducible Complexity</button>
+    <button class="tab-btn" onclick="showPaper(2)">Efficiency Gradient</button>
+    <button class="tab-btn" onclick="showPaper(3)">Natural Organization</button>
+    <button class="tab-btn" onclick="showPaper(4)">Absent From Observation</button>
+    <button class="tab-btn" onclick="showPaper(5)">Constitutive Intelligence</button>
+    <button class="tab-btn" onclick="showPaper(6)">Generalized Existence</button>
+    <button class="tab-btn" onclick="showPaper(7)">Branching Sensitivity</button>
+    <button class="tab-btn" onclick="showPaper(8)">Formal Logic</button>
+  </div>
+
+  <!-- P1 -->
+  <div class="paper-panel active" id="panel-0">
+    <div class="paper-header">
+      <p class="num">PAPER 01 — PRIMARY EMPIRICAL STUDY</p>
+      <h3>Non-Random Organizational Signal in Functional Protein Sequences: A Large-Scale Anchor-Single Pair Analysis Resistant to Biophysical, Phylogenetic, Nonlinear, and Spatial Controls</h3>
+      <p class="journal">In submission — Entropy (MDPI) | 2026</p>
+    </div>
+    <div class="paper-grid">
+      <div class="paper-block">
+        <h4>Abstract</h4>
+        <p>We analyzed <strong>61,320,087 amino acid Anchor-Single pairs</strong> from 1,527,212 functional protein domain instances (Pfam-A 37.0) and 19,630,673 pairs from 198,215 intrinsically disordered sequences (DisProt). Using 5-residue sequential windows, we identified local compositional preferences between a repeated residue (Anchor) and unique partner residues (Singles).</p>
+        <p>The diagnostic <strong>alanine-asparagine (A→N) pair</strong> is strongly avoided in functional sequences (Z = −87.13, Obs/Exp = 0.8422) but near-random in disordered sequences (Z = +2.33) — a categorical reversal of 89.46 Z-score points. After regression against 16 physicochemical controls, 78.4% of variance remains unexplained. The identical avoidance pattern is reproduced in <em>three-dimensional physical space</em> at protein-protein interfaces using direct heavy-atom proximity (&lt;5Å), independent of sequence order.</p>
+        <div class="stat-row">
+          <div class="stat-box"><span class="val">61.3M</span><span class="lbl">Pair Observations</span></div>
+          <div class="stat-box"><span class="val">−87.13</span><span class="lbl">A→N Z-Score</span></div>
+          <div class="stat-box"><span class="val">r=0.913</span><span class="lbl">Seq–3D Correlation</span></div>
+        </div>
+      </div>
+      <div class="paper-block">
+        <h4>Six Principal Findings</h4>
+        <ul class="finding-list">
+          <li>Functional and disordered sequences show <strong>categorically different patterns</strong> — A→N reversal of 89.46 Z-score points</li>
+          <li>Signal survives regression against <strong>16 physicochemical controls</strong>, with A→N residual hardening to Z = −90.24</li>
+          <li>Pattern <strong>replicates independently</strong> in CATH database (A→N Z = −25.08)</li>
+          <li>Robust across <strong>four levels of phylogenetic control</strong> and six window parameterizations (Obs/Exp 0.8285–0.8671)</li>
+          <li><strong>Nonlinear modeling</strong> (Random Forest, Gradient Boosting) leaves 43.7% of total variance unexplained</li>
+          <li>Identical pattern reproduced in <strong>3D space</strong> at protein-protein interfaces — Obs/Exp ≈ 0.83–0.87 invariant across all methods</li>
+        </ul>
+      </div>
+    </div>
+    <div class="paper-full-width">
+      <h4>The Spatial Replication — The Most Critical Finding</h4>
+      <p>When the analysis is moved from sequence space to three-dimensional physical space — measuring co-occurrence by direct atomic proximity rather than sequential position — <strong>the same ratio appears</strong>. At protein-protein inter-chain interfaces (any heavy atom within 5Å), A→N shows Obs/Exp = 0.8290. At homodimer interfaces, A→N shows Obs/Exp = 0.8289. The correlation between interface pair preferences and intra-chain surface preferences is r = 0.9134. Of 380 amino acid pairs, 284 (74.7%) show the same directional preference whether measured by sequence proximity or physical proximity — versus 50% expected by chance. The organizational signal is <em>physically instantiated in three-dimensional structure</em>. It is not a property of how sequences are written. It is a property of how proteins are built.</p>
+    </div>
+  </div>
+
+  <!-- P2 -->
+  <div class="paper-panel" id="panel-1">
+    <div class="paper-header">
+      <p class="num">PAPER 02 — BIOPHYSICAL HARDENING ANALYSIS</p>
+      <h3>The Irreducible Complexity of Amino Acid Pair Preferences: A 16-Variable Biophysical Hardening Analysis Reveals 78.4% Unexplained Variance in Protein Grammar</h3>
+      <p class="journal">Natural Organization Institute | 2026</p>
+    </div>
+    <div class="paper-grid">
+      <div class="paper-block">
+        <h4>The Core Challenge</h4>
+        <p>The central dogma of structural bioinformatics posits that residue-residue interaction preferences are emergent properties <strong>reducible to underlying physicochemical constraints</strong>. This paper challenges that assumption directly through a comprehensive "hardening protocol."</p>
+        <p>If biophysics were the primary driver, including 16 simultaneous variables should account for a majority of the variance. The global regression across all 380 possible amino acid pairs yielded an adjusted R² = 0.216. This leaves <strong>78.4% of organizational variance unexplained</strong> by the combined forces of physics and evolution.</p>
+      </div>
+      <div class="paper-block">
+        <h4>The Hardening Effect</h4>
+        <table class="data-table">
+          <tr><th>Pair</th><th>Raw Z</th><th>Residual Z</th><th>Effect</th></tr>
+          <tr><td><strong>A→N</strong></td><td>−87.13</td><td>−90.24</td><td><strong>Hardened</strong></td></tr>
+          <tr><td>A→L</td><td>253.43</td><td>216.17</td><td>Weakened</td></tr>
+          <tr><td>E→K</td><td>170.96</td><td>141.67</td><td>Weakened</td></tr>
+          <tr><td>R→L</td><td>148.57</td><td>129.84</td><td>Weakened</td></tr>
+        </table>
+        <p style="margin-top:1rem;">The diagnostic A→N avoidance signal does not weaken under controls. It strengthens. This indicates a functional organizational logic currently absent from standard biophysical models. 3D spatial contacts show even higher unexplained variance: 48.7% at interfaces, 51.1% at homodimer contacts.</p>
+      </div>
+    </div>
+    <div class="paper-full-width">
+      <h4>What Could Explain the Missing 78.4%?</h4>
+      <p>Three non-exclusive hypotheses are proposed: (1) <strong>Non-local effects</strong> — forces acting across distances not captured by standard force fields; (2) <strong>Evolutionary tiling</strong> — a "grammar" where pairs are selected for informational error-correction rather than structural stability alone; (3) <strong>Hydration dynamics</strong> — time-dependent water exclusion effects not captured by static hydrophobicity scales. The magnitude of the residual (78.4%) suggests that adding missing variables is unlikely to reduce unexplained variance to zero. The inclusion of BLOSUM62 already implicitly absorbs many unknown historical constraints — and the signal survives it.</p>
+    </div>
+  </div>
+
+  <!-- P3 -->
+  <div class="paper-panel" id="panel-2">
+    <div class="paper-header">
+      <p class="num">PAPER 03 — HIERARCHICAL ANALYSIS</p>
+      <h3>The Functional Inheritance Model: Sequence-Level Grammar as Generative Constraint in Protein Organization</h3>
+      <p class="journal">Natural Organization Institute | 2026</p>
+    </div>
+    <div class="paper-grid">
+      <div class="paper-block">
+        <h4>The Inverted Gradient</h4>
+        <p>Standard accounts predict functional constraint is strongest at sites of direct biological function. <strong>The data shows the opposite.</strong> Organizational signal is strongest at the sequence level and attenuates progressively at structural levels — across all subsets tested.</p>
+        <table class="data-table">
+          <tr><th>Level</th><th>Context</th><th>A→N Z</th></tr>
+          <tr><td>I. Sequence</td><td>Pfam Functional Domains</td><td><strong>−87.13</strong></td></tr>
+          <tr><td>II. Surface</td><td>Enzyme Non-Interface</td><td>−8.80</td></tr>
+          <tr><td>III. Interface</td><td>Homodimer Interfaces</td><td>−2.30</td></tr>
+          <tr><td>III. Interface</td><td>Enzyme Interfaces (SIFTS)</td><td>−2.91</td></tr>
+        </table>
+      </div>
+      <div class="paper-block">
+        <h4>The Functional Inheritance Model</h4>
+        <p>This pattern is consistent with a model in which <strong>sequence-level grammar pre-positions viable organizational solutions</strong> that are inherited and utilized at the structural level. Interfaces utilize pre-positioned materials rather than regenerating the grammar independently.</p>
+        <p>After regression against six physicochemical controls, <strong>97.7% of the A→N signal remains</strong> (R² = 0.0995) — near-complete orthogonality to all tested biophysical properties. Preference concentration: top-10 pairs carry 16.5% of signal at sequence level, rising to 54.5% at inter-chain interfaces (Gini: 0.46 → 0.64).</p>
+        <p><strong>Testable prediction:</strong> adaptive responses to environmental change should be observable on ecological timescales without requiring new mutations — consistent with Darwin's finch beak morphology observations.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- P4 -->
+  <div class="paper-panel" id="panel-3">
+    <div class="paper-header">
+      <p class="num">PAPER 04 — CROSS-DOMAIN FRAMEWORK</p>
+      <h3>Natural Organization: A Universal 90/10 Principle of Structure and Mutation</h3>
+      <p class="journal">Submitted to Entropy (MDPI) | March 2026</p>
+    </div>
+    <div class="paper-grid">
+      <div class="paper-block">
+        <h4>The NOI Framework</h4>
+        <p>Through <strong>13 complementary analytical approaches</strong> applied to over 1.66 million draws spanning 13 years, this study demonstrates that number generation systems exhibit outputs formally incompatible with IID processes. The <strong>Natural Organization Index (NOI)</strong> converges at approximately <strong>90/10</strong> — 90% structural adherence, 10% mutation-like deviation — across RNG families, biological systems, crystalline structures, and planetary dynamics.</p>
+        <p><strong>Formal IID incompatibility:</strong> zero days in 13 years produced high-absence windows against an IID expectation of ~12 such days (binomial p = 1.07 × 10⁻¹⁰⁶).</p>
+      </div>
+      <div class="paper-block">
+        <h4>The Element Classification Framework</h4>
+        <table class="data-table">
+          <tr><th>Symbol</th><th>Element</th><th>Structural Role</th></tr>
+          <tr><td><strong>A</strong></td><td>Anchor</td><td>Appears 3+ times; keystone stabilizer</td></tr>
+          <tr><td><strong>CO</strong></td><td>Carryover</td><td>Persists across draws; survivorship</td></tr>
+          <tr><td><strong>LA</strong></td><td>Linked Association</td><td>Adjacency-linked to A/CO</td></tr>
+          <tr><td><strong>LV</strong></td><td>Linked Void</td><td>Absent but adjacent — structured exclusion</td></tr>
+          <tr><td><strong>GN</strong></td><td>Generated</td><td>Bridges structural gaps</td></tr>
+          <tr><td><strong>UN</strong></td><td>Underrepresented</td><td>Absent — seeds new structural clusters</td></tr>
+        </table>
+        <p style="margin-top:1rem;">Universal co-selection memory confirmed across all five classification classes (Z &gt; 24, p ≈ 0 on 166,382 independent observations). Replicated across MT19937, PCG64, Xoshiro256**, ChaCha20, and ANU quantum source — EPF baseline = 0.8467 (SD &lt; 0.005).</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- P5 -->
+  <div class="paper-panel" id="panel-4">
+    <div class="paper-header">
+      <p class="num">PAPER 05 — GEOMETRY OF ABSENCE</p>
+      <h3>Absent From Observation: Constitutive Intelligence as the Unmeasurable Ground of Measurable Structure</h3>
+      <p class="journal">Natural Organization Institute | 2026</p>
+    </div>
+    <div class="paper-grid">
+      <div class="paper-block">
+        <h4>The Van Slyke Principle</h4>
+        <p style="font-size:1.05rem; font-style:italic; color:rgba(245,240,232,0.8); line-height:1.7; border-left:2px solid var(--gold); padding-left:1rem;">"Organizational intelligence is expressed through structured, informed absence rather than through presence alone. Systems that are organizationally intelligent exclude the right elements in the right ways — biochemically informed, geometrically precise, functionally purposeful exclusion."</p>
+        <p>Formalizing a principle discovered during analysis of a number generation system, this paper applies the geometry-of-absence principle to biological protein sequences at three independent measurement scales — all three confirming the same organizational signature through complementary angles: what is absent (LV/UN), what is avoided (Anchor-Single), and what is remembered (cohort recall).</p>
+      </div>
+      <div class="paper-block">
+        <h4>The LV/UN Framework — Three Measurement Levels</h4>
+        <table class="data-table">
+          <tr><th>System Type</th><th>LV%</th><th>UN%</th><th>LV/UN Ratio</th></tr>
+          <tr><td><strong>Functional (Pfam)</strong></td><td>38.07%</td><td>3.86%</td><td><strong>0.912</strong></td></tr>
+          <tr><td>Random (Monte Carlo)</td><td>34.55%</td><td>1.29%</td><td>0.968</td></tr>
+          <tr><td>Non-functional (DisProt)</td><td>30.14%</td><td>54.99%</td><td>0.402</td></tr>
+        </table>
+        <p style="margin-top:1rem;">Functional domains score <em>below random</em> because they deliberately create structured voids. That structured absence is the functional architecture itself. Z = 11.68, p = 1.54 × 10⁻³¹. Confirmed universally across 469 organisms — bacteria to humans to viruses. No organism shows the maximum entropy baseline.</p>
+      </div>
+    </div>
+    <div class="paper-full-width">
+      <h4>Constitutive Intelligence: The Precise Characterization</h4>
+      <p><em>Constitutive intelligence is that which is absent from observation but whose absence from existence is impossible.</em> In every system measured, ΔC never reaches zero. The Anchor-Single avoidance matrix never collapses to random. The co-selection memory architecture never dissolves to IID. Functional sequences achieve <strong>79× stochastic efficiency in anchor-based recall</strong> — CO class recall 1.4549× IID (Z = +471) on 821,862 independent positions. From this eternal, never-absent ground, all complexity accumulates.</p>
+    </div>
+  </div>
+
+  <!-- P6 -->
+  <div class="paper-panel" id="panel-5">
+    <div class="paper-header">
+      <p class="num">PAPER 06 — THEORETICAL SYNTHESIS</p>
+      <h3>Constitutive Intelligence: The Case for a Universal Organizing Principle</h3>
+      <p class="journal">Natural Organization Institute | 2026</p>
+    </div>
+    <div class="paper-grid">
+      <div class="paper-block">
+        <h4>The Central Observation</h4>
+        <p>Everywhere we find persistent, adaptive organization, we find it operating at a characteristic ratio: <strong>approximately 84–87% structural adherence, 13–16% variation</strong>. Across 14 independent measurements spanning biological sequences, three-dimensional physical space, information systems, and cosmological structure, a structural adherence ratio of approximately 0.83–0.87 appears consistently.</p>
+        <p>These are not the same measurement made multiple times. They are different quantities, measured by different methods, in systems that share no substrate and no direct physical connection. <em>One time is chance. Two times is a trend. Three times is evidence. Fourteen times requires explanation.</em></p>
+      </div>
+      <div class="paper-block">
+        <h4>Evidence Across Scales</h4>
+        <table class="data-table">
+          <tr><th>Context</th><th>Ratio</th><th>Method</th></tr>
+          <tr><td>Pfam sequences (full)</td><td><strong>0.8422</strong></td><td>Sequential window</td></tr>
+          <tr><td>4 phylogenetic controls</td><td>0.8285–0.8671</td><td>Subsampling</td></tr>
+          <tr><td>3D inter-chain interfaces</td><td>0.8290</td><td>Direct atomic contact</td></tr>
+          <tr><td>Homodimer contacts</td><td>0.8289</td><td>Direct atomic contact</td></tr>
+          <tr><td>RNG baseline (5 families)</td><td>0.8467</td><td>100K Monte Carlo trials</td></tr>
+          <tr><td>Dark matter fraction</td><td>~0.85</td><td>3 independent methods</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="paper-full-width">
+      <h4>A Note on Scope</h4>
+      <p>This document is explicitly not a proof, and says so clearly at the outset. Constitutive Intelligence as argued here is <strong>a physical principle</strong> — more fundamental than chemistry, biology, or physics as currently formulated, but operating within the natural world. The nomenclature — constitutive intelligence, God, the Tao, Brahman, the ground of being — is left to the observer. The formal system and its empirical grounding are independent of any label. The measurement says the same thing regardless of what the observer calls it.</p>
+    </div>
+  </div>
+
+  <!-- P7 -->
+  <div class="paper-panel" id="panel-6">
+    <div class="paper-header">
+      <p class="num">PAPER 07 — FORMAL CYBERNETIC FRAMEWORK</p>
+      <h3>The Generalized Existence Theorem: A Unified Formal Framework for the M/I/C Trinitarian Minimum</h3>
+      <p class="journal">Natural Organization Institute | 2026</p>
+    </div>
+    <div class="paper-grid">
+      <div class="paper-block">
+        <h4>The Generalized Existence Equation</h4>
+        <p>We formalize the functional requirements for persistent systems (Xf &gt; 0) within an entropic environment:</p>
+        <p style="font-size:1.1rem; color:var(--gold-light); text-align:center; padding:1rem; border:1px solid rgba(184,151,58,0.2); margin:1rem 0; letter-spacing:0.05em;">Xf(t) = ∫ ( Φ · ΔIsys / Ωsys ) − εsys dt</p>
+        <p>Three components are inseparable foundational minima — the <strong>M/I/C triad</strong>: Meaning/Valence (reference signal), Intelligence/Correction (comparator/actuator), and Loop Closure (feedback integration). Removal of any component leads to immediate systemic dissipation. This is the Minimum Functional Requirement for any closed-loop control system in cybernetics.</p>
+      </div>
+      <div class="paper-block">
+        <h4>The Four-Step Determination Chain</h4>
+        <ul class="finding-list">
+          <li><strong>Step 1:</strong> Non-randomness at the operational floor — A→N: Z = −87.13 functional vs. Z = +2.33 disordered. Categorical reversal across 61 million observations.</li>
+          <li><strong>Step 2:</strong> Non-random equals determined by definition. The opposite of random is determined.</li>
+          <li><strong>Step 3:</strong> Determined equals intelligent by functional derivation — determination requires a comparator; a comparator requires discernment; discernment cannot be blind; the functional description of what discernment requires is identical to the functional description of intelligence.</li>
+          <li><strong>Step 4:</strong> Physics confirms the terminus. No derived system produces more than its source. Intelligence at the operational floor requires constitutive intelligence at the source.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="paper-full-width">
+      <h4>Darwin's Own Falsification Condition — Satisfied</h4>
+      <p>Darwin specified: <em>"If it could be demonstrated that any complex organ existed which could not possibly have been formed by numerous successive slight modifications, my theory would absolutely break down."</em> The Anchor-Single data satisfies this on Darwin's own terms. The gap between functional and disordered pair preference matrices is not a gradient — it is a categorical organizational difference. Intelligence as the capacity to set and maintain organizational boundaries is not produced incrementally from systems that do not possess it. <strong>Zero boundary-setting capacity, multiplied by any number of steps, yields zero boundary-setting.</strong></p>
+    </div>
+  </div>
+
+  <!-- P8 -->
+  <div class="paper-panel" id="panel-7">
+    <div class="paper-header">
+      <p class="num">PAPER 08 — QUANTITATIVE DEMONSTRATION</p>
+      <h3>The Branching Sensitivity Measure: A Quantitative Signature of the Coordination Protocol Φ &gt; 0</h3>
+      <p class="journal">Natural Organization Institute | April 2026</p>
+    </div>
+    <div class="paper-grid">
+      <div class="paper-block">
+        <h4>The Core Demonstration</h4>
+        <p>Using a deterministic birth-death branching-process model over 3.8 billion years, this paper demonstrates that random variation plus natural selection alone produces a <strong>combinatorial explosion exceeding observed diversity</strong> (~10⁷ extant species) by many orders of magnitude — unless the branching factor is intrinsically suppressed by 8–12 orders of magnitude.</p>
+        <p>Mass extinctions contribute only a ~10⁻³ multiplicative factor. They cannot close a gap of dozens to hundreds of orders of magnitude. The required suppression is precisely the predicted signature of the M/I/C triad acting as an internal governor.</p>
+      </div>
+      <div class="paper-block">
+        <h4>Branching Sensitivity Results</h4>
+        <table class="data-table">
+          <tr><th>p (per individual/generation)</th><th>Expected Species</th></tr>
+          <tr><td>6.07 × 10⁻¹³ (critical threshold)</td><td><strong>~10⁷ (observed)</strong></td></tr>
+          <tr><td>6.07 × 10⁻¹²</td><td>≪ 10⁷ (extinction)</td></tr>
+          <tr><td>6.07 × 10⁻¹¹</td><td>&gt;&gt; 10³⁰⁰ (explosion)</td></tr>
+          <tr><td>6.07 × 10⁻¹⁰</td><td>&gt;&gt; 10³⁰⁰ (explosion)</td></tr>
+        </table>
+        <p style="margin-top:1rem;">Any modestly higher (and biologically plausible) branching probability triggers explosion. The observed pattern of life is not an anomaly but the predicted outcome of the Coordination Protocol Φ &gt; 0 with its M/I/C minimum as an internal governor.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- P9 -->
+  <div class="paper-panel" id="panel-8">
+    <div class="paper-header">
+      <p class="num">PAPER 09 — FORMAL AXIOMATIZATION</p>
+      <h3>Cosmic Intelligence Model: Formal First-Order Logical and Symbolic Representation</h3>
+      <p class="journal">Natural Organization Institute | April 2026</p>
+    </div>
+    <div class="paper-grid">
+      <div class="paper-block">
+        <h4>Lemma 0 — Grounding the Existence Claim</h4>
+        <p>A central contribution is <strong>Lemma 0</strong>: the existence of constitutive intelligence (Int₀) is not a bare assumption but a <em>logical consequence</em> of two independently established premises.</p>
+        <p><strong>Premise L1 (Empirical):</strong> ΔC(N) = 1 − H_observed/H_max &gt; 0 at all 16 biological measurements — four organisms, four complexity levels. No system retreats to maximum entropy. Structure is present at every measurable level.</p>
+        <p><strong>Premise L2 (Conservation):</strong> No system produces output whose information content exceeds its source — simultaneously thermodynamic, logical, and mathematical necessity.</p>
+        <p><strong>Conclusion:</strong> A source present at inception, never absent, already exceeding every level of intelligence matter has expressed, satisfies the functional definition of constitutive intelligence.</p>
+      </div>
+      <div class="paper-block">
+        <h4>Theorem 1: Comparator Primacy</h4>
+        <p>Lemma 0b establishes that the mathematical comparator is logically prior to all laws. Conservation requires criterion-governed differential constraint at every point — distinguishing states that satisfy conservation from those that would violate it. <strong>That is discernment by functional definition.</strong></p>
+        <p style="font-size:0.92rem; color:var(--gold-light); padding:1rem; border:1px solid rgba(184,151,58,0.2); margin:1rem 0; line-height:1.7;">Conservation ⟹ ∃κ ( Mathematical(κ) ∧ ∀L ( Law(L) → Prior(κ, L) ) )</p>
+        <p>Naming conservation "a law of nature" does not explain what is doing the distinguishing. The capacity to maintain a distinction between categories of states — consistently, without exception, according to a criterion — is what discernment means at its most stripped-down functional level. An account that explains this without presupposing it does not exist in the physical, mathematical, or philosophical literature. Its absence is the completion of the framework, not a gap in it.</p>
+      </div>
+    </div>
+    <div class="paper-full-width">
+      <h4>The 16-Axiom Framework</h4>
+      <p>The paper presents 16 formal first-order logic axioms — from Primacy of Int₀ (Axiom 1) and Generation of Order and Laws (Axiom 2) through Conservation of Information (Axiom 9), Non-Generation of intelligence de novo (Axiom 10), Comparator Necessity (Axiom 11), Mathematics as Primitive Comparator (Axiom 12), and Noether Symmetry Presupposition (Axiom 13). The unified chain: <em>Int₀ ≡ κ (Mathematical Comparator) → (O, L, S) → E → (D, Rk) → Inte</em>. The nomenclature — constitutive intelligence, God, the Tao, Brahman — is left to the observer. The formal system is independent of any label. The measurement says the same thing regardless of what the observer calls it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERIES OVERVIEW -->
+<section class="series" id="series">
+  <p class="section-label reveal">Research Architecture</p>
+  <h2 class="section-title reveal">Nine papers. One <em>converging argument.</em></h2>
+  <p class="section-body reveal">Each paper addresses a distinct layer — from empirical measurement to formal theory — building a structured, cross-validated case for a foundational organizational principle in living systems.</p>
+  <div class="series-list">
+    <div class="series-card reveal"><p class="num">01</p><h4>Anchor-Single Analysis</h4><p>61.3M pair observations. The primary empirical foundation — A→N categorical reversal surviving all controls and replicating in 3D space.</p><span class="tag">In Submission</span></div>
+    <div class="series-card reveal"><p class="num">02</p><h4>Irreducible Complexity</h4><p>78.4% unexplained variance after 16 biophysical controls. The hardening effect establishes orthogonality to known chemistry.</p><span class="tag">NOI — 2026</span></div>
+    <div class="series-card reveal"><p class="num">03</p><h4>Efficiency Gradient</h4><p>Signal strongest at sequence level, attenuating at structural levels — inconsistent with standard constraint prediction. The Functional Inheritance Model.</p><span class="tag">NOI — 2026</span></div>
+    <div class="series-card reveal"><p class="num">04</p><h4>Natural Organization</h4><p>Universal 90/10 principle. Formal IID incompatibility established across 1.66M draws, 13 years, 5 RNG families.</p><span class="tag">Submitted — Entropy</span></div>
+    <div class="series-card reveal"><p class="num">05</p><h4>Absent From Observation</h4><p>Structure reveals itself through the geometry of exclusion. LV/UN framework confirmed across 469 organisms spanning the tree of life.</p><span class="tag">NOI — 2026</span></div>
+    <div class="series-card reveal"><p class="num">06</p><h4>Constitutive Intelligence</h4><p>14 independent measurements across biological, informational, and cosmological scales converge on ratio 0.83–0.87.</p><span class="tag">NOI — 2026</span></div>
+    <div class="series-card reveal"><p class="num">07</p><h4>Generalized Existence Theorem</h4><p>Formal cybernetic proof establishing M/I/C as inseparable foundational minima. The Determination Chain closed in four steps.</p><span class="tag">NOI — 2026</span></div>
+    <div class="series-card reveal"><p class="num">08</p><h4>Branching Sensitivity</h4><p>Quantitative demonstration: observed species diversity requires branching suppression of 8–12 orders of magnitude. Darwin's falsification condition satisfied.</p><span class="tag">NOI — April 2026</span></div>
+    <div class="series-card reveal"><p class="num">09</p><h4>Formal Logic</h4><p>16-axiom first-order axiomatization. Lemma 0 grounds the existence of constitutive intelligence in empirical observation and the conservation principle.</p><span class="tag">NOI — April 2026</span></div>
+  </div>
+</section>
+
+<!-- KEY FINDINGS BANNER -->
+<div class="findings-banner" id="findings">
+  <p class="section-label">The Central Measurement</p>
+  <div class="gold-divider" style="max-width:400px;margin:1.5rem auto;"><span>ORGANIZATIONAL INVARIANCE</span></div>
+  <blockquote>"The Obs/Exp ratio of ~0.83–0.87 is invariant across sequential analysis, phylogenetic controls, parameter sweeps, and purely spatial 3D contact measurement. A signal that persists with the same characteristic ratio whether measured by sequence proximity or direct physical proximity is unlikely to be coincidental."</blockquote>
+  <cite>— Anchor-Single Analysis of Protein Sequence Organization, Van Slyke 2026</cite>
+  <div class="metrics-row">
+    <div class="metric"><span class="val">61.3M+</span><span class="lbl">Pair Observations</span></div>
+    <div class="metric"><span class="val">16</span><span class="lbl">Biophysical Controls</span></div>
+    <div class="metric"><span class="val">78.4%</span><span class="lbl">Variance Unexplained</span></div>
+    <div class="metric"><span class="val">r=0.923</span><span class="lbl">Sequence–3D Correlation</span></div>
+    <div class="metric"><span class="val">9</span><span class="lbl">Research Papers</span></div>
+    <div class="metric"><span class="val">14×</span><span class="lbl">Independent Confirmations</span></div>
+  </div>
+</div>
+
+<!-- FRAMEWORK -->
+<section class="framework">
+  <p class="section-label reveal">Our Approach</p>
+  <h2 class="section-title reveal">Four principles of <em>natural organization</em></h2>
+  <div class="framework-grid">
+    <div class="f-card reveal">
+      <div class="f-icon"><svg viewBox="0 0 24 24" stroke-width="1.2"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg></div>
+      <h4>Empirical First</h4>
+      <p>Every claim is grounded in measurement. We do not assume what produces organizational signals — we quantify them.</p>
+    </div>
+    <div class="f-card reveal">
+      <div class="f-icon"><svg viewBox="0 0 24 24" stroke-width="1.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <h4>Rigorous Controls</h4>
+      <p>16 biophysical variables. 4 phylogenetic levels. Nonlinear modeling. Spatial replication. Every escape route examined.</p>
+    </div>
+    <div class="f-card reveal">
+      <div class="f-icon"><svg viewBox="0 0 24 24" stroke-width="1.2"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4"/><path d="M16 11h6M19 8v6"/></svg></div>
+      <h4>Independent Replication</h4>
+      <p>CATH, Pfam, DisProt, MobiDB, PDB interfaces, homodimers — methodologically independent databases converging on the same signal.</p>
+    </div>
+    <div class="f-card reveal">
+      <div class="f-icon"><svg viewBox="0 0 24 24" stroke-width="1.2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+      <h4>Cross-Scale Coherence</h4>
+      <p>From 5-residue sequence windows to cosmological structure, the same organizational ratio appears. Not coincidence — convergence.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDER -->
+<section class="founder" id="founder">
+  <p class="section-label reveal">The Institute</p>
+  <h2 class="section-title reveal" style="margin-bottom:3rem;">Founded on the conviction that<br><em>nature's organization is legible</em></h2>
+  <div class="founder-inner reveal">
+    <div class="founder-portrait"><span class="founder-portrait-initials">PBV</span></div>
+    <div class="founder-text">
+      <p class="role">Founder & Principal Researcher</p>
+      <h3>P.B. Van Slyke</h3>
+      <p>The Natural Organization Institute was founded to pursue a rigorous empirical question: does the organizational structure observed in living systems constitute evidence of something beyond stochastic accumulation? The approach is empirical, not speculative. We measure. We control. We replicate.</p>
+      <p>The research began with a methodological insight from 13 years of number generation analysis: structure reveals itself not through what is present, but through the precision of what is absent. That insight was transferred to protein sequence biology, where it has produced nine papers and a body of findings that current biophysical frameworks do not explain.</p>
+      <p>Current research is being submitted for peer-reviewed publication to <em>Entropy</em> (MDPI) and <em>Biology and Physiology</em>. We welcome correspondence from researchers working at the intersection of information theory, structural biology, and the origins of biological complexity.</p>
+      <p style="margin-top:1.5rem;"><strong>Location:</strong> Lyons, Colorado &nbsp;|&nbsp; <strong>Email:</strong> van.slyke@naturalorganization.org</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <p class="section-label">Get In Touch</p>
+  <h2 class="section-title light">Collaborate or <em>correspond</em></h2>
+  <p class="section-body light">We welcome inquiries from researchers, institutions, and anyone with a genuine interest in the empirical study of natural organization.</p>
+  <form class="contact-form" onsubmit="return false;">
+    <input type="text" placeholder="Name">
+    <input type="email" placeholder="Email">
+    <input type="text" placeholder="Affiliation or Institution (optional)">
+    <textarea placeholder="Message — research inquiries, collaboration proposals, and peer review interest welcome"></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+</section>
+
+<footer>
+  <div class="footer-logo">NATURAL ORGANIZATION INSTITUTE</div>
+  <div class="footer-tagline">Understand Nature. Organize Naturally. Create Lasting Impact.</div>
+  <div class="footer-copy">© 2026 NOI &nbsp;|&nbsp; Lyons, Colorado</div>
+</footer>
+
+<script>
+  function showPaper(idx) {
+    document.querySelectorAll('.paper-panel').forEach((p,i) => p.classList.toggle('active', i===idx));
+    document.querySelectorAll('.tab-btn').forEach((b,i) => b.classList.toggle('active', i===idx));
+  }
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => observer.observe(el));
+  window.addEventListener('scroll', () => {
+    document.querySelector('nav').style.boxShadow = window.scrollY > 50 ? '0 2px 30px rgba(0,0,0,0.12)' : 'none';
+  });
+</script>
+</body>
+</html>
