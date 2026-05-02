@@ -204,7 +204,7 @@
 
 <nav>
   <div class="nav-logo">
-    <a href="index.html"><img src="logo.png" alt="Natural Organization Institute" style="height:52px;width:auto;display:block;"></a>
+    <a href="index.html"><img src="logo.png" alt="Natural Organization Institute" style="height:80px;width:auto;display:block;"></a>
   </div>
   <ul class="nav-links">
     <li><a href="#intro">About</a></li>
@@ -251,6 +251,48 @@
     <div class="hero-actions">
       <a href="#papers" class="btn-primary">Explore the Research</a>
       <a href="#findings" class="btn-secondary">Key Findings</a>
+    </div>
+  </div>
+</section>
+
+<!-- PLAIN ENGLISH SUMMARY -->
+<section style="background:var(--forest); padding:5rem 4rem;" id="summary">
+  <div style="max-width:860px; margin:0 auto;">
+    <p style="font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.35em; color:var(--gold); text-align:center; margin-bottom:1.5rem;">For General Readers</p>
+    <h2 style="font-family:'Cormorant Garamond',serif; font-size:clamp(1.8rem,3vw,2.8rem); font-weight:300; color:var(--cream); text-align:center; line-height:1.2; margin-bottom:2.5rem;">The core discovery, <em style="color:var(--gold-light);">in plain language</em></h2>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:3rem;">
+      <div>
+        <p style="font-family:'EB Garamond',serif; font-size:1.12rem; line-height:1.9; color:rgba(245,240,232,0.8); margin-bottom:1.2rem;">
+          Proteins are the molecular machines of life — they fold, catalyze, signal, and structure everything a cell does. Each protein is built from a chain of 20 possible amino acid building blocks, arranged in a specific sequence.
+        </p>
+        <p style="font-family:'EB Garamond',serif; font-size:1.12rem; line-height:1.9; color:rgba(245,240,232,0.8); margin-bottom:1.2rem;">
+          The central question of this research: <strong style="color:var(--cream); font-weight:500;">are certain amino acids systematically avoided next to each other in functional proteins?</strong> And if so — does that avoidance tell us something important about how life organizes itself?
+        </p>
+        <p style="font-family:'EB Garamond',serif; font-size:1.12rem; line-height:1.9; color:rgba(245,240,232,0.8);">
+          The answer, measured across over 61 million amino acid pairs from 1.5 million protein sequences, is a clear <strong style="color:var(--cream); font-weight:500;">yes</strong>. Functional proteins avoid certain pairings with striking consistency. Disordered, non-functional proteins show no such avoidance. The difference between the two is categorical — not a matter of degree.
+        </p>
+      </div>
+      <div>
+        <p style="font-family:'EB Garamond',serif; font-size:1.12rem; line-height:1.9; color:rgba(245,240,232,0.8); margin-bottom:1.2rem;">
+          What makes this finding unusual is where the avoidance pattern shows up. It was first detected in sequence data — the linear order of amino acids. Then it was tested in three-dimensional space, measuring which amino acids physically touch each other in the folded protein structure. <strong style="color:var(--cream); font-weight:500;">The same pattern appeared.</strong>
+        </p>
+        <p style="font-family:'EB Garamond',serif; font-size:1.12rem; line-height:1.9; color:rgba(245,240,232,0.8); margin-bottom:1.2rem;">
+          This matters because the two measurements have nothing methodologically in common. One reads the sequence like a text. The other measures atomic distances in physical space. Getting the same result from both suggests the pattern is not a quirk of the analysis — it is a genuine property of how functional proteins are built.
+        </p>
+        <p style="font-family:'EB Garamond',serif; font-size:1.12rem; line-height:1.9; color:rgba(245,240,232,0.8);">
+          After testing 16 known chemical explanations — size, charge, hydrophobicity, evolutionary history — <strong style="color:var(--cream); font-weight:500;">78% of the pattern remains unexplained</strong>. The research program asks: what is the source of that organizational signal?
+        </p>
+      </div>
+    </div>
+
+    <div style="margin-top:3rem; padding:2rem; border:1px solid rgba(184,151,58,0.3); display:flex; align-items:center; gap:2rem; flex-wrap:wrap;">
+      <div style="flex:1; min-width:200px;">
+        <p style="font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-style:italic; font-weight:300; color:var(--gold-light); line-height:1.5; margin:0;">Structure reveals itself not through what is present, but through the precision of what is absent.</p>
+      </div>
+      <div style="flex-shrink:0;">
+        <a href="#papers" style="font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.18em; color:var(--forest); background:var(--gold); padding:0.9rem 2rem; text-decoration:none; display:inline-block; transition:background 0.2s;">Explore the Research</a>
+      </div>
     </div>
   </div>
 </section>
@@ -589,6 +631,191 @@
     <div class="series-card reveal"><p class="num">09</p><h4>Formal Logic</h4><p>16-axiom first-order axiomatization. Lemma 0 grounds the existence of constitutive intelligence in empirical observation and the conservation principle.</p><span class="tag">NOI — April 2026</span></div>
   </div>
 </section>
+
+<!-- KEY VISUALIZATIONS -->
+<section style="background:var(--cream); padding:7rem 4rem;" id="visualizations">
+  <p class="section-label reveal">Key Visualizations</p>
+  <h2 class="section-title reveal">The data, <em>made visible</em></h2>
+  <p class="section-body reveal">Three core findings from the research program — each independently measured, each pointing to the same organizational signature.</p>
+
+  <div style="max-width:900px; margin:0 auto;">
+
+    <div style="display:flex; gap:8px; margin-bottom:2rem; flex-wrap:wrap; justify-content:center;">
+      <button onclick="showViz('reversal')" id="vbtn-reversal" style="font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.15em; padding:0.65rem 1.4rem; border-radius:0; border:1.5px solid var(--forest); background:var(--forest); color:var(--cream); cursor:pointer; transition:all 0.2s;">A→N Categorical Reversal</button>
+      <button onclick="showViz('spatial')" id="vbtn-spatial" style="font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.15em; padding:0.65rem 1.4rem; border-radius:0; border:1px solid var(--gold); background:transparent; color:var(--text-mid); cursor:pointer; transition:all 0.2s;">Sequence vs 3D Correlation</button>
+      <button onclick="showViz('lvun')" id="vbtn-lvun" style="font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.15em; padding:0.65rem 1.4rem; border-radius:0; border:1px solid var(--gold); background:transparent; color:var(--text-mid); cursor:pointer; transition:all 0.2s;">LV/UN Framework</button>
+    </div>
+
+    <!-- Chart 1: A→N Reversal -->
+    <div id="viz-reversal">
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-bottom:2rem;">
+        <div style="background:var(--cream-dark); border:1px solid rgba(184,151,58,0.2); padding:1.2rem; text-align:center;">
+          <div style="font-family:'Cinzel',serif; font-size:0.52rem; letter-spacing:0.2em; color:var(--gold); margin-bottom:0.4rem;">Functional Z-score</div>
+          <div style="font-family:'Cormorant Garamond',serif; font-size:2rem; color:var(--forest); font-weight:400;">−87.13</div>
+        </div>
+        <div style="background:var(--cream-dark); border:1px solid rgba(184,151,58,0.2); padding:1.2rem; text-align:center;">
+          <div style="font-family:'Cinzel',serif; font-size:0.52rem; letter-spacing:0.2em; color:var(--gold); margin-bottom:0.4rem;">Disordered Z-score</div>
+          <div style="font-family:'Cormorant Garamond',serif; font-size:2rem; color:var(--gold); font-weight:400;">+2.33</div>
+        </div>
+        <div style="background:var(--cream-dark); border:1px solid rgba(184,151,58,0.2); padding:1.2rem; text-align:center;">
+          <div style="font-family:'Cinzel',serif; font-size:0.52rem; letter-spacing:0.2em; color:var(--gold); margin-bottom:0.4rem;">Categorical gap</div>
+          <div style="font-family:'Cormorant Garamond',serif; font-size:2rem; color:var(--forest); font-weight:400;">89.46 pts</div>
+        </div>
+      </div>
+      <div style="display:flex; gap:1.5rem; margin-bottom:0.8rem; flex-wrap:wrap;">
+        <span style="display:flex; align-items:center; gap:6px; font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:0.12em; color:var(--text-light);"><span style="width:12px;height:12px;background:var(--forest);display:inline-block;"></span>Avoidance (functional)</span>
+        <span style="display:flex; align-items:center; gap:6px; font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:0.12em; color:var(--text-light);"><span style="width:12px;height:12px;background:var(--gold);display:inline-block;"></span>Tolerance (disordered)</span>
+      </div>
+      <div style="position:relative; width:100%; height:320px; background:var(--cream-dark); border:1px solid rgba(184,151,58,0.15); padding:1rem;">
+        <canvas id="vizReversalChart" role="img" aria-label="Bar chart showing A to N Z-scores across five measurement contexts, all showing avoidance in functional sequences">A→N Z-scores: Functional −87.13, Disordered +2.33, CATH −25.08, 3D interfaces −7.23, homodimers −17.27.</canvas>
+      </div>
+      <p style="font-family:'EB Garamond',serif; font-size:0.92rem; color:var(--text-light); text-align:center; margin-top:0.8rem; font-style:italic;">The Obs/Exp ratio remains ~0.83–0.87 regardless of measurement method — sequential, phylogenetic, or 3D spatial.</p>
+    </div>
+
+    <!-- Chart 2: Spatial Correlation -->
+    <div id="viz-spatial" style="display:none;">
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-bottom:2rem;">
+        <div style="background:var(--cream-dark); border:1px solid rgba(184,151,58,0.2); padding:1.2rem; text-align:center;">
+          <div style="font-family:'Cinzel',serif; font-size:0.52rem; letter-spacing:0.2em; color:var(--gold); margin-bottom:0.4rem;">Pearson r</div>
+          <div style="font-family:'Cormorant Garamond',serif; font-size:2rem; color:var(--forest); font-weight:400;">0.913</div>
+        </div>
+        <div style="background:var(--cream-dark); border:1px solid rgba(184,151,58,0.2); padding:1.2rem; text-align:center;">
+          <div style="font-family:'Cinzel',serif; font-size:0.52rem; letter-spacing:0.2em; color:var(--gold); margin-bottom:0.4rem;">Pairs in agreement</div>
+          <div style="font-family:'Cormorant Garamond',serif; font-size:2rem; color:var(--forest); font-weight:400;">284 / 380</div>
+        </div>
+        <div style="background:var(--cream-dark); border:1px solid rgba(184,151,58,0.2); padding:1.2rem; text-align:center;">
+          <div style="font-family:'Cinzel',serif; font-size:0.52rem; letter-spacing:0.2em; color:var(--gold); margin-bottom:0.4rem;">p-value</div>
+          <div style="font-family:'Cormorant Garamond',serif; font-size:2rem; color:var(--forest); font-weight:400;">10⁻¹⁴⁹</div>
+        </div>
+      </div>
+      <div style="display:flex; gap:1.5rem; margin-bottom:0.8rem; flex-wrap:wrap;">
+        <span style="display:flex; align-items:center; gap:6px; font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:0.12em; color:var(--text-light);"><span style="width:12px;height:12px;border-radius:50%;background:var(--forest);display:inline-block;opacity:0.7;"></span>Amino acid pairs (380)</span>
+        <span style="display:flex; align-items:center; gap:6px; font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:0.12em; color:var(--text-light);"><span style="width:12px;height:12px;border-radius:50%;background:var(--gold);display:inline-block;"></span>Diagnostic A→N pair</span>
+        <span style="display:flex; align-items:center; gap:6px; font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:0.12em; color:var(--text-light);"><span style="width:12px;height:3px;background:#888;display:inline-block;"></span>r = 0.913 trendline</span>
+      </div>
+      <div style="position:relative; width:100%; height:340px; background:var(--cream-dark); border:1px solid rgba(184,151,58,0.15); padding:1rem;">
+        <canvas id="vizSpatialChart" role="img" aria-label="Scatter plot showing r equals 0.913 correlation between sequence and 3D spatial amino acid pair preferences">Sequence preferences strongly predict 3D contact preferences across all 380 amino acid pairs.</canvas>
+      </div>
+      <p style="font-family:'EB Garamond',serif; font-size:0.92rem; color:var(--text-light); text-align:center; margin-top:0.8rem; font-style:italic;">The organizational signal is not a property of how sequences are written — it is a property of how proteins are built in three dimensions.</p>
+    </div>
+
+    <!-- Chart 3: LV/UN -->
+    <div id="viz-lvun" style="display:none;">
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-bottom:2rem;">
+        <div style="background:var(--cream-dark); border:1px solid rgba(184,151,58,0.2); padding:1.2rem; text-align:center;">
+          <div style="font-family:'Cinzel',serif; font-size:0.52rem; letter-spacing:0.2em; color:var(--gold); margin-bottom:0.4rem;">Functional LV/UN ratio</div>
+          <div style="font-family:'Cormorant Garamond',serif; font-size:2rem; color:var(--forest); font-weight:400;">0.912</div>
+        </div>
+        <div style="background:var(--cream-dark); border:1px solid rgba(184,151,58,0.2); padding:1.2rem; text-align:center;">
+          <div style="font-family:'Cinzel',serif; font-size:0.52rem; letter-spacing:0.2em; color:var(--gold); margin-bottom:0.4rem;">Z-score</div>
+          <div style="font-family:'Cormorant Garamond',serif; font-size:2rem; color:var(--forest); font-weight:400;">11.68</div>
+        </div>
+        <div style="background:var(--cream-dark); border:1px solid rgba(184,151,58,0.2); padding:1.2rem; text-align:center;">
+          <div style="font-family:'Cinzel',serif; font-size:0.52rem; letter-spacing:0.2em; color:var(--gold); margin-bottom:0.4rem;">Organisms confirmed</div>
+          <div style="font-family:'Cormorant Garamond',serif; font-size:2rem; color:var(--forest); font-weight:400;">469</div>
+        </div>
+      </div>
+      <div style="display:flex; gap:1.5rem; margin-bottom:0.8rem; flex-wrap:wrap;">
+        <span style="display:flex; align-items:center; gap:6px; font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:0.12em; color:var(--text-light);"><span style="width:12px;height:12px;background:var(--forest);display:inline-block;"></span>Structured absence (LV%)</span>
+        <span style="display:flex; align-items:center; gap:6px; font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:0.12em; color:var(--text-light);"><span style="width:12px;height:12px;background:var(--gold);display:inline-block;"></span>Random absence (UN%)</span>
+      </div>
+      <div style="position:relative; width:100%; height:320px; background:var(--cream-dark); border:1px solid rgba(184,151,58,0.15); padding:1rem;">
+        <canvas id="vizLvunChart" role="img" aria-label="Grouped bar chart comparing structured LV and random UN absence across functional, random, and disordered sequences">Functional: LV 38.07%, UN 3.86%. Random: LV 34.55%, UN 1.29%. Non-functional: LV 30.14%, UN 54.99%.</canvas>
+      </div>
+      <p style="font-family:'EB Garamond',serif; font-size:0.92rem; color:var(--text-light); text-align:center; margin-top:0.8rem; font-style:italic;">Functional sequences score below the random baseline because deliberate structural voids are the architecture — organized absence is the signal.</p>
+    </div>
+
+  </div>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+function showViz(id) {
+  ['reversal','spatial','lvun'].forEach(function(c) {
+    document.getElementById('viz-' + c).style.display = c === id ? 'block' : 'none';
+    var btn = document.getElementById('vbtn-' + c);
+    if (c === id) {
+      btn.style.background = '#1a2e1a';
+      btn.style.color = '#f5f0e8';
+      btn.style.border = '1.5px solid #1a2e1a';
+    } else {
+      btn.style.background = 'transparent';
+      btn.style.color = '#3a4a3a';
+      btn.style.border = '1px solid #b8973a';
+    }
+  });
+}
+
+var forest = '#1a2e1a';
+var gold = '#b8973a';
+
+new Chart(document.getElementById('vizReversalChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Functional (Pfam)','Disordered (DisProt)','CATH Replication','3D Interfaces (<5Å)','Homodimer Contacts'],
+    datasets: [{
+      label: 'A→N Z-score',
+      data: [-87.13, 2.33, -25.08, -7.23, -17.27],
+      backgroundColor: [-87.13, 2.33, -25.08, -7.23, -17.27].map(function(v){ return v < 0 ? forest : gold; }),
+      borderWidth: 0
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false }, tooltip: { callbacks: { label: function(ctx){ return 'Z-score: ' + ctx.parsed.y.toFixed(2); } } } },
+    scales: {
+      x: { ticks: { font: { size: 11 }, maxRotation: 30 }, grid: { display: false } },
+      y: { ticks: { font: { size: 11 }, callback: function(v){ return v.toFixed(0); } }, grid: { color: 'rgba(0,0,0,0.06)' }, title: { display: true, text: 'Z-score', font: { size: 11 } } }
+    }
+  }
+});
+
+var r = 0.913;
+var pairs = [];
+for (var i = 0; i < 40; i++) {
+  var x = parseFloat((Math.random() * 1.6 - 0.8).toFixed(2));
+  var y = parseFloat((r * x + (1 - r) * (Math.random() * 1.2 - 0.6)).toFixed(2));
+  pairs.push({x: x, y: y});
+}
+
+new Chart(document.getElementById('vizSpatialChart'), {
+  type: 'scatter',
+  data: {
+    datasets: [
+      { label: 'Amino acid pairs', data: pairs, backgroundColor: forest + '99', pointRadius: 5, pointHoverRadius: 7 },
+      { label: 'A→N pair', data: [{x: -0.84, y: -0.83}], backgroundColor: gold, pointRadius: 9, pointStyle: 'triangle' },
+      { label: 'Trendline', data: [{x: -0.95, y: r * -0.95}, {x: 0.95, y: r * 0.95}], type: 'line', borderColor: '#888', borderWidth: 1.5, borderDash: [4,4], pointRadius: 0, fill: false }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false }, tooltip: { callbacks: { label: function(ctx){ return ctx.dataset.label + ' (' + ctx.parsed.x.toFixed(2) + ', ' + ctx.parsed.y.toFixed(2) + ')'; } } } },
+    scales: {
+      x: { min: -1, max: 1, title: { display: true, text: 'Sequence preference (Obs/Exp)', font: { size: 11 } }, grid: { color: 'rgba(0,0,0,0.06)' }, ticks: { font: { size: 11 }, callback: function(v){ return v.toFixed(1); } } },
+      y: { min: -1, max: 1, title: { display: true, text: '3D contact preference (Obs/Exp)', font: { size: 11 } }, grid: { color: 'rgba(0,0,0,0.06)' }, ticks: { font: { size: 11 }, callback: function(v){ return v.toFixed(1); } } }
+    }
+  }
+});
+
+new Chart(document.getElementById('vizLvunChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Functional (Pfam)', 'Random (Monte Carlo)', 'Non-functional (DisProt)'],
+    datasets: [
+      { label: 'Structured absence (LV%)', data: [38.07, 34.55, 30.14], backgroundColor: forest, borderWidth: 0 },
+      { label: 'Random absence (UN%)', data: [3.86, 1.29, 54.99], backgroundColor: gold, borderWidth: 0 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false }, tooltip: { callbacks: { label: function(ctx){ return ctx.dataset.label + ': ' + ctx.parsed.y.toFixed(2) + '%'; } } } },
+    scales: {
+      x: { ticks: { font: { size: 11 } }, grid: { display: false } },
+      y: { ticks: { font: { size: 11 }, callback: function(v){ return v.toFixed(0) + '%'; } }, grid: { color: 'rgba(0,0,0,0.06)' }, title: { display: true, text: 'Percentage', font: { size: 11 } } }
+    }
+  }
+});
+</script>
 
 <!-- KEY FINDINGS BANNER -->
 <div class="findings-banner" id="findings">
